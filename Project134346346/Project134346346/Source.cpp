@@ -216,6 +216,8 @@ float leftLeg4 = 0.0f;
 float leftLeg5 = 0.0f;
 float leftLeg6 = 0.0f;
 
+GLuint texture = 0;
+
 
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -7324,14 +7326,6 @@ void animation() {
 	}
 
 	if (thrusterRotation == 30) {
-		downKneeBreakSpeed = 0.00005f;
-	}
-
-	if (downKneeBreak == 0.02f) {
-		upKneeRotationSpeed = 0.03f;
-	}
-
-	if (upKneeRotation == 25) {
 		upperLegBreakSpeed = 0.0001f;
 	}
 
@@ -7347,7 +7341,7 @@ void animation() {
 	if (rotationbelt2 == 40) {
 
 		rotationSpeedwaist = 0.0002f;
-		
+
 	}
 
 	if (rotationwaist == 0.03f) {
@@ -7386,14 +7380,14 @@ void animation() {
 
 	//head
 
-	
 
 
-	
+
+
 }
 
 void backAnimation() {
-	
+
 	rotationSpeedsheild = -0.002;
 
 	rotationSpeedshouder1 = -0.0004f;
@@ -7435,7 +7429,6 @@ void backAnimation() {
 
 	}
 
-	
 	if (rotationbelt6 == 0.0) {
 		upperLegBreakSpeed = -0.00010f;
 	}
@@ -7456,10 +7449,10 @@ void backAnimation() {
 			whiteLockerSpeedY = -0.0005f;
 			whiteLockerSpeedZ = -0.00010f;
 
-			
+
 		}
 
-		
+
 	}
 
 	if (rotationFoot == 0.0f) {
@@ -7472,10 +7465,10 @@ void backAnimation() {
 
 	}
 
-	
+
 
 	//---------------------------------------
-	
+
 
 }
 
@@ -11723,8 +11716,9 @@ void display()
 	glPopMatrix();
 
 
+
 	glDisable(GL_TEXTURE_2D);
-	glDeleteTextures(1, &texture1);
+	glDeleteTextures(1, &texture);
 
 	//--------------------------------
 	//	End of OpenGL drawing
