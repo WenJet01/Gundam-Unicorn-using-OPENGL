@@ -7309,26 +7309,13 @@ void animation() {
 		lowerHandBreakSpeed = 0.00005f;  //lowerHandBreak == 0.03f
 	}
 
-	if (lowerHandBreak == 0.03f) {
-		saberRotationSpeed = 0.1f;   
-
-	}
-
-	if (saberRotation == 180) {
-		saberYSpeed = 0.0002f;
-	}
+	
 }
 
 void backAnimation() {
-	saberYSpeed = -0.0002f;
-
-	if (saberY == -0.16f) {
-		saberRotationSpeed = -0.1f;
-	}
-
-	if (saberRotation == 0.0f) {
-		lowerHandBreakSpeed = -0.00005f;
-	}
+	
+	lowerHandBreakSpeed = -0.00005f;
+	
 
 
 
@@ -7568,8 +7555,8 @@ void legThruster() {
 	//glRotatef(5, 1, 0, 0);
 	glTranslatef(0, -0.52, -0.02);
 
-	if (redThrusterRotation >= 10) {
-		redThrusterRotation = 10;
+	if (redThrusterRotation >= 15) {
+		redThrusterRotation = 15;
 		redThrusterRotationSpeed = 0.0f;
 	}
 	else if (redThrusterRotation <= 0) {
