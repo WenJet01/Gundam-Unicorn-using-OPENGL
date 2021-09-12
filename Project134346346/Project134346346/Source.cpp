@@ -319,10 +319,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 		if (wParam == 0x5A) {  //Z
 			if (rotationSpeeddoor == -0.04f) {
-				rotationSpeeddoor = +0.04f;
+				rotationSpeeddoor = +0.06f;
 			}
 			else {
-				rotationSpeeddoor = -0.04f;
+				rotationSpeeddoor = -0.06f;
 			}
 		}
 
