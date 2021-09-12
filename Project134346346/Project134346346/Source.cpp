@@ -107,6 +107,18 @@ float rotationhandright3 = 0;
 float rotationhandleft4 = 0;
 float rotationhandright4 = 0;
 
+float rotationhandlefts = 0;
+float rotationhandrights = 0;
+
+float rotationhandleft2s = 0;
+float rotationhandright2s = 0;
+
+float rotationhandleft3s = 0;
+float rotationhandright3s = 0;
+
+float rotationhandleft4s = 0;
+float rotationhandright4s = 0;
+
 float rotationfan = 0;
 float rotationSpeedfan = 0;
 
@@ -133,7 +145,9 @@ float rotationSpeedbelt6 = 0;
 
 float updown = 1;
 float rotaionhead1 = 0;
+float rotaionhead1s = 0;
 float rotaionhead2 = 0;
+float rotaionhead2s = 0;
 float handsaber1 = 0;
 float handsaber2 = 0;
 float handsaber1speed = 0;
@@ -183,6 +197,12 @@ float leftSaberRotationSpeed = 0.0f;
 float leftSaberY = -0.16f;
 float leftSaberYSpeed = 0.0f;
 
+float upKneeRotation = 0.0f;
+float upKneeRotationSpeed = 0.0f;
+
+float downKneeBreak = 0.0f;
+float downKneeBreakSpeed = 0.0f;
+
 GLUquadricObj* leftLegBone = gluNewQuadric();
 GLUquadricObj* leftLegRedBone = gluNewQuadric();
 GLUquadricObj* leftLegUpperJoint = gluNewQuadric();
@@ -202,6 +222,39 @@ float eyeZ = 1.0f;
 
 int rightSaberB = -1;
 int leftSaberB = -1;
+
+
+float rightLeg1 = 0.0f;
+float rightLeg2 = 0.0f;
+float rightLeg3 = 0.0f;
+float rightLeg4 = 0.0f;
+float rightLeg5 = 0.0f;
+float rightLeg6 = 0.0f;
+float rightLeg1s = 0.0f;
+float rightLeg2s = 0.0f;
+float rightLeg3s = 0.0f;
+float rightLeg4s = 0.0f;
+float rightLeg5s = 0.0f;
+float rightLeg6s = 0.0f;
+
+float leftLeg1 = 0.0f;
+float leftLeg2 = 0.0f;
+float leftLeg3 = 0.0f;
+float leftLeg4 = 0.0f;
+float leftLeg5 = 0.0f;
+float leftLeg6 = 0.0f;
+float leftLeg1s = 0.0f;
+float leftLeg2s = 0.0f;
+float leftLeg3s = 0.0f;
+float leftLeg4s = 0.0f;
+float leftLeg5s = 0.0f;
+float leftLeg6s = 0.0f;
+
+GLuint texture = 0;
+
+int pose1 = -1;
+int pose2 = -1;
+
 
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -363,10 +416,30 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 
 		if (wParam == 0x58) {  //X
+			//pose 1
+			if (pose1 == -1) {
+				pose1 = 1;
+			}
+			else if (pose1 == 1) {
+				pose1 = 0;
+			}
+			else if (pose1 == 0) {
+				pose1 = 1;
+			}
 
 		}
 
 		if (wParam == 0x43) {  //C
+			//pose 2
+			if (pose2 == -1) {
+				pose2 = 1;
+			}
+			else if (pose2 == 1) {
+				pose2 = 0;
+			}
+			else if (pose2 == 0) {
+				pose2 = 1;
+			}
 
 		}
 
@@ -485,6 +558,341 @@ bool initPixelFormat(HDC hdc)
 
 //--------------------------------------------------------------------
 
+void pose1a() {
+	leftLeg3s = -0.1f;
+	leftLeg6s = 0.1f;
+	rightLeg1s = -0.1f;
+	rightLeg3s = 0.1f;
+	rightLeg4s = 0.1f;
+	rightLeg6s = -0.1f;
+
+	rotaionhead1s = 0.05f;
+	rotaionhead2s = 0.05f;
+
+	rotationhandlefts = 0.1f;
+	rotationhandleft2s = 0.1f;
+	rotationhandleft3s = 0.1f;
+	rotationhandleft4s = 0.1f;
+
+	rotationhandrights = -0.1f;
+	rotationhandright2s = -0.1f;
+	rotationhandright3s = -0.1f;
+
+	if (leftLeg3 <= -30) {
+		leftLeg3 = -30;
+		leftLeg3s = 0.0f;
+	}
+	if (leftLeg6 >= 30) {
+		leftLeg6 = 30;
+		leftLeg6s = 0.0f;
+	}
+	if (rightLeg1 <= -40) {
+		rightLeg1 = -40;
+		rightLeg1s = 0.0f;
+	}
+	if (rightLeg3 >= 40) {
+		rightLeg3 = 40;
+		rightLeg3s = 0.0f;
+	}
+	if (rightLeg4 >= 40) {
+		rightLeg4 = 40;
+		rightLeg4s = 0.0f;
+	}
+	if (rightLeg6 <= -30) {
+		rightLeg6 = -30;
+		rightLeg6s = 0.0f;
+	}
+	if (rotaionhead1 >= 20) {
+		rotaionhead1 = 20;
+		rotaionhead1s = 0.0f;
+	}
+	if (rotaionhead2 >= 40) {
+		rotaionhead2 = 40;
+		rotaionhead2s = 0.0f;
+	}
+	if (rotationhandleft >= 40) {
+		rotationhandleft = 40;
+		rotationhandlefts = 0.0f;
+	}
+	if (rotationhandleft2 >= 50) {
+		rotationhandleft2 = 50;
+		rotationhandleft2s = 0.0f;
+	}
+	if (rotationhandleft3 >= 50) {
+		rotationhandleft3 = 50;
+		rotationhandleft3s = 0.0f;
+	}
+	if (rotationhandleft4 >= 50) {
+		rotationhandleft4 = 50;
+		rotationhandleft4s = 0.0f;
+	}
+	if (rotationhandright <= -70) {
+		rotationhandright = -70;
+		rotationhandrights = 0.0f;
+	}
+	if (rotationhandright2 <= -10) {
+		rotationhandright2 = -10;
+		rotationhandright2s = 0.0f;
+	}
+	if (rotationhandright3 <= -20) {
+		rotationhandright3 = -20;
+		rotationhandright3s = 0.0f;
+	}
+}
+
+void pose1ab() {
+	leftLeg3s = 0.1f;
+	leftLeg6s = -0.1f;
+	rightLeg1s = 0.1f;
+	rightLeg3s = -0.1f;
+	rightLeg4s = -0.1f;
+	rightLeg6s = 0.1f;
+
+	rotaionhead1s = -0.05f;
+	rotaionhead2s = -0.05f;
+
+	rotationhandlefts = -0.1f;
+	rotationhandleft2s = -0.1f;
+	rotationhandleft3s = -0.1f;
+	rotationhandleft4s = -0.1f;
+
+	rotationhandrights = 0.1f;
+	rotationhandright2s = 0.1f;
+	rotationhandright3s = 0.1f;
+
+	if (leftLeg3 > 0) {
+		leftLeg3 = 0;
+		leftLeg3s = 0.0f;
+	}
+	if (leftLeg6 < 0) {
+		leftLeg6 = 0;
+		leftLeg6s = 0.0f;
+	}
+	if (rightLeg1 > 0) {
+		rightLeg1 = 0;
+		rightLeg1s = 0.0f;
+	}
+	if (rightLeg3 < 0) {
+		rightLeg3 = 0;
+		rightLeg3s = 0.0f;
+	}
+	if (rightLeg4 <0) {
+		rightLeg4 = 0;
+		rightLeg4s = 0.0f;
+	}
+	if (rightLeg6 > 0) {
+		rightLeg6 = 0;
+		rightLeg6s = 0.0f;
+	}
+	if (rotaionhead1 < 0) {
+		rotaionhead1 = 0;
+		rotaionhead1s = 0.0f;
+	}
+	if (rotaionhead2 < 0) {
+		rotaionhead2 = 0;
+		rotaionhead2s = 0.0f;
+	}
+	if (rotationhandleft < 0) {
+		rotationhandleft = 0;
+		rotationhandlefts = 0.0f;
+	}
+	if (rotationhandleft2 < 0) {
+		rotationhandleft2 = 0;
+		rotationhandleft2s = 0.0f;
+	}
+	if (rotationhandleft3 < 0) {
+		rotationhandleft3 = 0;
+		rotationhandleft3s = 0.0f;
+	}
+	if (rotationhandleft4 < 0) {
+		rotationhandleft4 = 0;
+		rotationhandleft4s = 0.0f;
+	}
+	if (rotationhandright > 0) {
+		rotationhandright = 0;
+		rotationhandrights = 0.0f;
+	}
+	if (rotationhandright2 > 0) {
+		rotationhandright2 = 0;
+		rotationhandright2s = 0.0f;
+	}
+	if (rotationhandright3 > 0) {
+		rotationhandright3 = 0;
+		rotationhandright3s = 0.0f;
+	}
+}
+
+void pose2a() {
+	leftLeg1 = 20;
+	leftLeg3 = -10;
+	leftLeg4 = 20;
+	leftLeg5 = 30; //1
+	rightLeg1 = -50;
+	rightLeg3 = 10;
+	rightLeg4 = 80;
+	rightLeg5 = 50;
+
+	rotaionhead2 = -30;
+
+	rotationhandleft = -40;
+	rotationhandleft2 = -45;
+	
+
+	rotationhandright = -100;
+	rotationhandright3 = -90;
+	rotationhandright4 = -80;
+
+	/*if (leftLeg1 >= 20) {
+		leftLeg3 = -30;
+		leftLeg3s = 0.0f;
+	}
+	if (leftLeg3 <= -10) {
+		leftLeg6 = 30;
+		leftLeg6s = 0.0f;
+	}
+	if (leftLeg4 <= 20) {
+		leftLeg3 = -30;
+		leftLeg3s = 0.0f;
+	}
+	if (leftLeg6 >= 30) {
+		leftLeg6 = 30;
+		leftLeg6s = 0.0f;
+	}
+	if (rightLeg1 <= -40) {
+		rightLeg1 = -40;
+		rightLeg1s = 0.0f;
+	}
+	if (rightLeg3 >= 40) {
+		rightLeg3 = 40;
+		rightLeg3s = 0.0f;
+	}
+	if (rightLeg4 >= 40) {
+		rightLeg4 = 40;
+		rightLeg4s = 0.0f;
+	}
+	if (rightLeg6 <= -30) {
+		rightLeg6 = -30;
+		rightLeg6s = 0.0f;
+	}
+	if (rotaionhead1 >= 20) {
+		rotaionhead1 = 20;
+		rotaionhead1s = 0.0f;
+	}
+	if (rotaionhead2 >= 40) {
+		rotaionhead2 = 40;
+		rotaionhead2s = 0.0f;
+	}
+	if (rotationhandleft >= 40) {
+		rotationhandleft = 40;
+		rotationhandlefts = 0.0f;
+	}
+	if (rotationhandleft2 >= 50) {
+		rotationhandleft2 = 50;
+		rotationhandleft2s = 0.0f;
+	}
+	if (rotationhandleft3 >= 50) {
+		rotationhandleft3 = 50;
+		rotationhandleft3s = 0.0f;
+	}
+	if (rotationhandleft4 >= 50) {
+		rotationhandleft4 = 50;
+		rotationhandleft4s = 0.0f;
+	}
+	if (rotationhandright <= -70) {
+		rotationhandright = -70;
+		rotationhandrights = 0.0f;
+	}
+	if (rotationhandright2 <= -10) {
+		rotationhandright2 = -10;
+		rotationhandright2s = 0.0f;
+	}
+	if (rotationhandright3 <= -20) {
+		rotationhandright3 = -20;
+		rotationhandright3s = 0.0f;
+	}*/
+}
+
+void pose2ab() {
+	leftLeg1 = 0;
+	leftLeg3 = 0;
+	leftLeg4 = 0;
+	leftLeg5 = 0; //1
+	rightLeg1 = 0;
+	rightLeg3 = 0;
+	rightLeg4 = 0;
+	rightLeg5 = 0;
+
+	rotaionhead2 = 0;
+
+	rotationhandleft = 0;
+	rotationhandleft2 = 0;
+
+
+	rotationhandright = 0;
+	rotationhandright3 = 0;
+	rotationhandright4 = 0;
+
+	/*if (leftLeg3 > 0) {
+		leftLeg3 = 0;
+		leftLeg3s = 0.0f;
+	}
+	if (leftLeg6 < 0) {
+		leftLeg6 = 0;
+		leftLeg6s = 0.0f;
+	}
+	if (rightLeg1 > 0) {
+		rightLeg1 = 0;
+		rightLeg1s = 0.0f;
+	}
+	if (rightLeg3 < 0) {
+		rightLeg3 = 0;
+		rightLeg3s = 0.0f;
+	}
+	if (rightLeg4 < 0) {
+		rightLeg4 = 0;
+		rightLeg4s = 0.0f;
+	}
+	if (rightLeg6 > 0) {
+		rightLeg6 = 0;
+		rightLeg6s = 0.0f;
+	}
+	if (rotaionhead1 < 0) {
+		rotaionhead1 = 0;
+		rotaionhead1s = 0.0f;
+	}
+	if (rotaionhead2 < 0) {
+		rotaionhead2 = 0;
+		rotaionhead2s = 0.0f;
+	}
+	if (rotationhandleft < 0) {
+		rotationhandleft = 0;
+		rotationhandlefts = 0.0f;
+	}
+	if (rotationhandleft2 < 0) {
+		rotationhandleft2 = 0;
+		rotationhandleft2s = 0.0f;
+	}
+	if (rotationhandleft3 < 0) {
+		rotationhandleft3 = 0;
+		rotationhandleft3s = 0.0f;
+	}
+	if (rotationhandleft4 < 0) {
+		rotationhandleft4 = 0;
+		rotationhandleft4s = 0.0f;
+	}
+	if (rotationhandright > 0) {
+		rotationhandright = 0;
+		rotationhandrights = 0.0f;
+	}
+	if (rotationhandright2 > 0) {
+		rotationhandright2 = 0;
+		rotationhandright2s = 0.0f;
+	}
+	if (rotationhandright3 > 0) {
+		rotationhandright3 = 0;
+		rotationhandright3s = 0.0f;
+	}*/
+}
 
 void head()
 {
@@ -7286,14 +7694,14 @@ void rightSaberAnimation() {
 	saberRotationSpeed = 0.1f;
 
 	if (saberRotation == 180) {
-		saberYSpeed = 0.0002f;
+		saberYSpeed = 0.002f;
 	}
 
 }
 
 void rightSaberAnimationBack() {
 
-	saberYSpeed = -0.0002f;
+	saberYSpeed = -0.002f;
 
 	if (saberY == -0.16f) {
 		saberRotationSpeed = -0.1f;
@@ -7342,6 +7750,14 @@ void animation() {
 	}
 
 	if (thrusterRotation == 30) {
+		downKneeBreakSpeed = 0.0001f;
+	}
+
+	if (downKneeBreak == 0.02f) {
+		upKneeRotationSpeed = 0.05f;
+	}
+
+	if (upKneeRotation == 25) {
 		upperLegBreakSpeed = 0.0001f;
 	}
 
@@ -7450,9 +7866,17 @@ void backAnimation() {
 	}
 
 	if (upperLegBreak == 0.0) {
+		upKneeRotationSpeed = -0.05f;
+
+	}
+
+	if (upKneeRotation == 0) {
+		downKneeBreakSpeed = -0.0001f;
+	}
+
+	if (downKneeBreak == 0.0f) {
 		thrusterRotationSpeed = -0.050f;
 		redThrusterRotationSpeed = -0.02f;
-
 	}
 
 	if (redThrusterRotation == 0.0) {
@@ -8770,101 +9194,60 @@ void leftFoot() {
 
 	glPopMatrix();
 
-	//glTranslatef(0.0f, -0.2f, 0.0f);
-
-
-
-	//glColor3f(1, 1, 1);
-	////up
-	////up
-	//glBegin(GL_QUADS);
-	//glVertex3f(-0.09, 0.14, 0.34);
-	//glVertex3f(0.09, 0.14, 0.34);
-	//glVertex3f(0.13, 0.24, 0.18);
-	//glVertex3f(-0.13, 0.24, 0.18);
-	//glEnd();
-
-	////down
-	//glBegin(GL_QUADS);
-	//glVertex3f(-0.09, 0.135, 0.34);
-	//glVertex3f(0.09, 0.135, 0.34);
-	//glVertex3f(0.13, 0.235, 0.18);
-	//glVertex3f(-0.13, 0.235, 0.18);
-	//glEnd();
-
-	////front
-	//glColor3f(0.7, 0.7, 0.8);
-	//glBegin(GL_QUADS);
-	//glVertex3f(-0.09, 0.135, 0.34);
-	//glVertex3f(0.09, 0.135, 0.34);
-	//glVertex3f(0.09, 0.14, 0.34);
-	//glVertex3f(-0.09, 0.14, 0.34);
-	//glEnd();
-
-	////right
-	//glBegin(GL_QUADS);
-	//glVertex3f(0.09, 0.135, 0.34);
-	//glVertex3f(0.13, 0.235, 0.18);
-	//glVertex3f(0.13, 0.24, 0.18);
-	//glVertex3f(0.09, 0.14, 0.34);
-	//glEnd();
-
-	////left
-	//glBegin(GL_QUADS);
-	//glVertex3f(-0.09, 0.135, 0.34);
-	//glVertex3f(-0.13, 0.235, 0.18);
-	//glVertex3f(-0.13, 0.24, 0.18);
-	//glVertex3f(-0.09, 0.14, 0.34);
-	//glEnd();
-
-	////back
-	//glBegin(GL_QUADS);
-	//glVertex3f(0.13, 0.235, 0.18);
-	//glVertex3f(-0.13, 0.235, 0.18);
-	//glVertex3f(-0.13, 0.24, 0.18);
-	//glVertex3f(0.13, 0.24, 0.18);
-	//glEnd();
-
-	////right front
-	////right
-	//glColor3f(1, 1, 1);
-	//glBegin(GL_POLYGON);
-	//glVertex3f(0.104, 0.11, 0.3);
-	//glVertex3f(0.126, 0.14, 0.22);
-	//glVertex3f(0.105, 0.172, 0.28);
-	//glVertex3f(0.09, 0.135, 0.34);
-	//glEnd();
-
-
-	//glBegin(GL_POLYGON);
-	//glVertex3f(0.133, 0.11, 0.21);
-	//glVertex3f(0.173, 0.18, 0.06);
-	//glVertex3f(0.13, 0.235, 0.18);
-	//glVertex3f(0.105, 0.172, 0.28);
-	//glEnd();
-
-	////left front
-	////left
-	//glBegin(GL_POLYGON);
-	//glVertex3f(-0.104, 0.11, 0.3);
-	//glVertex3f(-0.126, 0.14, 0.22);
-	//glVertex3f(-0.105, 0.172, 0.28);
-	//glVertex3f(-0.09, 0.135, 0.34);
-	//glEnd();
-
-
-	//glBegin(GL_POLYGON);
-	//glVertex3f(-0.133, 0.11, 0.21);
-	//glVertex3f(-0.173, 0.18, 0.06);
-	//glVertex3f(-0.13, 0.235, 0.18);
-	//glVertex3f(-0.105, 0.172, 0.28);
-	//glEnd();
-
-
-	//glPopMatrix();
-	////end of upper foot white thing
+	
 
 	leftLegDownJoint();
+
+	//back low circle
+	//left
+	glColor3f(0.95, 0.95, 0.95);
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.11, 0.15, -0.02);
+	glVertex3f(-0.11, 0.105, 0.04);
+	glVertex3f(-0.11, 0.105, 0.188);
+	glVertex3f(-0.11, 0.22, 0.06);
+	glVertex3f(-0.11, 0.22, -0.02);
+	glEnd();
+
+	//right
+	glBegin(GL_POLYGON);
+	glVertex3f(0.11, 0.15, -0.02);
+	glVertex3f(0.11, 0.105, 0.04);
+	glVertex3f(0.11, 0.105, 0.188);
+	glVertex3f(0.11, 0.22, 0.06);
+	glVertex3f(0.11, 0.22, -0.02);
+	glEnd();
+
+	//back
+	glColor3f(0.92, 0.92, 0.92);
+	glBegin(GL_QUADS);
+	glVertex3f(0.11, 0.15, -0.02);
+	glVertex3f(-0.11, 0.15, -0.02);
+	glVertex3f(-0.11, 0.22, -0.02);
+	glVertex3f(0.11, 0.22, -0.02);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glVertex3f(0.11, 0.15, -0.01);
+	glVertex3f(-0.11, 0.15, -0.01);
+	glVertex3f(-0.11, 0.22, -0.01);
+	glVertex3f(0.11, 0.22, -0.01);
+	glEnd();
+
+	glColor3f(0.9, 0.9, 0.9);
+	glBegin(GL_QUADS);
+	glVertex3f(0.11, 0.22, -0.02);
+	glVertex3f(-0.11, 0.22, -0.02);
+	glVertex3f(-0.11, 0.22, -0.01);
+	glVertex3f(0.11, 0.22, -0.01);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glVertex3f(0.11, 0.15, -0.02);
+	glVertex3f(-0.11, 0.15, -0.02);
+	glVertex3f(-0.11, 0.15, -0.01);
+	glVertex3f(0.11, 0.15, -0.01);
+	glEnd();
 }
 
 void leftSmallLegBreakDown() {
@@ -9105,56 +9488,7 @@ void leftSmallLegBreakDown() {
 	glVertex3f(0.085, 0.27, 0.02);
 	glEnd();
 
-	//back low circle
-	//left
-	glColor3f(0.95, 0.95, 0.95);
-	glBegin(GL_POLYGON);
-	glVertex3f(-0.11, 0.15, -0.02);
-	glVertex3f(-0.11, 0.105, 0.04);
-	glVertex3f(-0.11, 0.105, 0.188);
-	glVertex3f(-0.11, 0.22, 0.06);
-	glVertex3f(-0.11, 0.22, -0.02);
-	glEnd();
-
-	//right
-	glBegin(GL_POLYGON);
-	glVertex3f(0.11, 0.15, -0.02);
-	glVertex3f(0.11, 0.105, 0.04);
-	glVertex3f(0.11, 0.105, 0.188);
-	glVertex3f(0.11, 0.22, 0.06);
-	glVertex3f(0.11, 0.22, -0.02);
-	glEnd();
-
-	//back
-	glColor3f(0.92, 0.92, 0.92);
-	glBegin(GL_QUADS);
-	glVertex3f(0.11, 0.15, -0.02);
-	glVertex3f(-0.11, 0.15, -0.02);
-	glVertex3f(-0.11, 0.22, -0.02);
-	glVertex3f(0.11, 0.22, -0.02);
-	glEnd();
-
-	glBegin(GL_QUADS);
-	glVertex3f(0.11, 0.15, -0.01);
-	glVertex3f(-0.11, 0.15, -0.01);
-	glVertex3f(-0.11, 0.22, -0.01);
-	glVertex3f(0.11, 0.22, -0.01);
-	glEnd();
-
-	glColor3f(0.9, 0.9, 0.9);
-	glBegin(GL_QUADS);
-	glVertex3f(0.11, 0.22, -0.02);
-	glVertex3f(-0.11, 0.22, -0.02);
-	glVertex3f(-0.11, 0.22, -0.01);
-	glVertex3f(0.11, 0.22, -0.01);
-	glEnd();
-
-	glBegin(GL_QUADS);
-	glVertex3f(0.11, 0.15, -0.02);
-	glVertex3f(-0.11, 0.15, -0.02);
-	glVertex3f(-0.11, 0.15, -0.01);
-	glVertex3f(0.11, 0.15, -0.01);
-	glEnd();
+	
 }
 
 void rightArmJoints() {
@@ -9245,7 +9579,191 @@ void rightArmJoints() {
 	glPopMatrix();
 }
 
+void knee() {
+	//red inside
+	glColor3f(colorr,colorg,colorb);
+
+	//left
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.041,0.55,0.13);
+	glVertex3f(-0.041, 0.63, 0.20);
+	glVertex3f(-0.041, 0.67, 0.20);
+	glVertex3f(-0.041, 0.69, 0.18);
+	glVertex3f(-0.041, 0.68, 0.13);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.041, 0.55, 0.13);
+	glVertex3f(0.041, 0.63, 0.20);
+	glVertex3f(0.041, 0.67, 0.20);
+	glVertex3f(0.041, 0.69, 0.18);
+	glVertex3f(0.041, 0.68, 0.13);
+	glEnd();
+
+	//below
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.041, 0.55, 0.13);
+	glVertex3f(0.041, 0.55, 0.13);
+	glVertex3f(0.041, 0.63, 0.20);
+	glVertex3f(-0.041, 0.63, 0.20);
+	glEnd();
+
+	//up
+	glBegin(GL_POLYGON);	
+	glVertex3f(-0.041, 0.68, 0.13);
+	glVertex3f(0.041, 0.68, 0.13);
+	glVertex3f(0.041, 0.69, 0.18);
+	glVertex3f(-0.041, 0.69, 0.18);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.041, 0.69, 0.18);
+	glVertex3f(-0.041, 0.69, 0.18);
+	glVertex3f(-0.041, 0.67, 0.20);
+	glVertex3f(0.041, 0.67, 0.20);
+	glEnd();
+
+	//front
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.041, 0.63, 0.20);
+	glVertex3f(0.041, 0.63, 0.20);
+	glVertex3f(0.041, 0.67, 0.20);
+	glVertex3f(-0.041, 0.67, 0.20);
+	glEnd();
+
+	//upper armor
+	glPushMatrix();
+
+	upKneeRotation += upKneeRotationSpeed;
+
+	glTranslatef(-0.05, 0.681, 0.13);
+	glRotatef(-upKneeRotation, 1, 0, 0);
+	glTranslatef(0.05, -0.681, -0.13);
+
+	if (upKneeRotation >= 25) {
+		upKneeRotation = 25;
+		upKneeRotationSpeed = 0.0f;
+	}else if (upKneeRotation <= 0) {
+		upKneeRotation = 0;
+		upKneeRotationSpeed = 0.0f;
+	}
+
+	glColor3f(0.96,0.96,0.96);
+
+	//left
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.05,0.62,0.13);
+	glVertex3f(-0.05, 0.66, 0.21);
+	glVertex3f(-0.05, 0.72, 0.21);
+	glVertex3f(-0.05, 0.681, 0.13);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.05, 0.62, 0.13);
+	glVertex3f(0.05, 0.66, 0.21);
+	glVertex3f(0.05, 0.72, 0.21);
+	glVertex3f(0.05, 0.681, 0.13);
+	glEnd();
+
+	//up
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.05, 0.72, 0.21);
+	glVertex3f(0.05, 0.72, 0.21);
+	glVertex3f(0.05, 0.681, 0.13);
+	glVertex3f(-0.05, 0.681, 0.13);
+	glEnd();
+
+	//front
+	glColor3f(0.98, 0.98, 0.98);
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.05, 0.66, 0.21);
+	glVertex3f(0.05, 0.66, 0.21);
+	glVertex3f(0.05, 0.72, 0.21);
+	glVertex3f(-0.05, 0.72, 0.21);
+	glEnd();
+
+	
+
+	glPopMatrix();
+
+	//lower armor
+	glPushMatrix();
+	glColor3f(0.90, 0.90, 0.90);
+
+	downKneeBreak += downKneeBreakSpeed;
+	glTranslatef(0, -downKneeBreak, 0);
+
+	if (downKneeBreak >= 0.02f) {
+		downKneeBreak = 0.02f;
+		downKneeBreakSpeed = 0.0f;
+	}
+	else if (downKneeBreak <= 0.0f) {
+		downKneeBreak = 0.0f;
+		downKneeBreakSpeed = 0.0f;
+	}
+
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.05, 0.54, 0.13);
+	glVertex3f(-0.05, 0.62, 0.21);
+	glVertex3f(-0.05, 0.66, 0.21);
+	glVertex3f(-0.05, 0.62, 0.13);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.05, 0.54, 0.13);
+	glVertex3f(0.05, 0.62, 0.21);
+	glVertex3f(0.05, 0.66, 0.21);
+	glVertex3f(0.05, 0.62, 0.13);
+	glEnd();
+
+	//down
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.05, 0.54, 0.13);
+	glVertex3f(0.05, 0.54, 0.13);
+	glVertex3f(0.05, 0.62, 0.21);
+	glVertex3f(-0.05, 0.62, 0.21);
+	glEnd();
+
+	//front
+	glColor3f(0.92, 0.92, 0.92);
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.05, 0.62, 0.21);
+	glVertex3f(0.05, 0.62, 0.21);
+	glVertex3f(0.05, 0.66, 0.21);
+	glVertex3f(-0.05, 0.66, 0.21);
+	glEnd();
+	glPopMatrix();
+
+}
+
 void leftLeg() {
+	//leg up
+	glPushMatrix();
+	/*glRotatef(-5, 0, 0, 1);
+	glTranslatef(-0.115, -1.05, -0.1);*/
+	
+	
+	
+
+	glTranslatef(0.0, 1, 0.1);
+	////////glRotatef(-5, 0, 0, 1);
+	glRotatef(leftLeg1, 1, 0, 0);
+
+
+	glRotatef(leftLeg2, 0, 1, 0);
+
+	glRotatef(leftLeg3, 0, 0, 1);
+
+	
+	
+
+	////glRotatef(5, 0, 0, 1);
+	glTranslatef(0.0, -1, -0.1);
+	//to centre
+
+	
+
+
 
 	//upper break
 	glPushMatrix();
@@ -9279,12 +9797,34 @@ void leftLeg() {
 	glTranslatef(0, -0.8, 0);
 	leftBigLegDown();
 	glPopMatrix();
+	
+	
 
-	leftSmallLeg();
+	
+
+
+	//leg middle
+	glPushMatrix();
+
+	glTranslatef(0, 0.65, 0.1);
+
+	glRotatef(leftLeg4, 1, 0, 0);
+
+
+	glTranslatef(0, -0.65, -0.1);
+	//to centre
+
 	leftLegUpJoint();
+	knee();
+	leftSmallLeg();
 	legThruster();
 	smallLegShield();
+	
 
+
+
+	
+	
 
 	//lower break move down
 	glPushMatrix();
@@ -9310,7 +9850,7 @@ void leftLeg() {
 	glRotatef(45, 0.0f, 1.0f, 0.0f);
 	glRotatef(270, 1.0f, 0.0f, 0.0f);
 	gluQuadricDrawStyle(leftLegBone, GLU_FILL);
-	gluCylinder(leftLegBone, 0.06, 0.06, 0.45, 4, 1);
+	gluCylinder(leftLegBone, 0.06, 0.06, 0.40, 4, 1);
 
 	glPopMatrix();
 
@@ -9325,21 +9865,81 @@ void leftLeg() {
 
 	glPopMatrix();
 
-	leftFoot();
+	
 
 	leftSmallLegBreakDown();
+	
+	
+	
+	
+	
+	//leg down
+	glPushMatrix();
+	glTranslatef(0, 0.25, 0.1);
 
+	glRotatef(leftLeg5, 1, 0, 0);
+
+
+	glRotatef(leftLeg6, 0, 0, 1);
+	
+
+	glTranslatef(0, -0.25, -0.1);
+	//to centre
+	
+	leftFoot();
 
 	glPopMatrix();
 
 
 
+
+
+
 	glPopMatrix();
 
+	glPopMatrix();
+
+
+	
+	glPopMatrix();
+
+	//leg middle
+	glPopMatrix();
+
+	
+
+	//leg up
 	glPopMatrix();
 }
 
 void rightLeg() {
+	//leg up
+	glPushMatrix();
+	/*glRotatef(-5, 0, 0, 1);
+	glTranslatef(-0.115, -1.05, -0.1);*/
+
+
+
+	glTranslatef(0.0, 1, 0.1);
+	////////glRotatef(-5, 0, 0, 1);
+
+	glRotatef(rightLeg1, 1, 0, 0);
+
+
+	glRotatef(rightLeg2, 0, 1, 0);
+
+
+	glRotatef(rightLeg3, 0, 0, 1);
+
+
+
+	////glRotatef(5, 0, 0, 1);
+	glTranslatef(0.0, -1, -0.1);
+	//to centre
+
+
+
+
 
 	//upper break
 	glPushMatrix();
@@ -9374,10 +9974,31 @@ void rightLeg() {
 	rightBigLegDown();
 	glPopMatrix();
 
-	leftSmallLeg();
+
+
+
+
+
+	//leg middle
+	glPushMatrix();
+	glTranslatef(0, 0.65, 0.1);
+
+	glRotatef(rightLeg4, 1, 0, 0);
+
+
+	glTranslatef(0, -0.65, -0.1);
+	//to centre
+
 	leftLegUpJoint();
+	knee();
+	leftSmallLeg();
 	legThruster();
 	smallLegShield();
+
+
+
+
+
 
 
 	//lower break move down
@@ -9404,7 +10025,7 @@ void rightLeg() {
 	glRotatef(45, 0.0f, 1.0f, 0.0f);
 	glRotatef(270, 1.0f, 0.0f, 0.0f);
 	gluQuadricDrawStyle(leftLegBone, GLU_FILL);
-	gluCylinder(leftLegBone, 0.06, 0.06, 0.45, 4, 1);
+	gluCylinder(leftLegBone, 0.06, 0.06, 0.40, 4, 1);
 
 	glPopMatrix();
 
@@ -9419,17 +10040,49 @@ void rightLeg() {
 
 	glPopMatrix();
 
-	leftFoot();
+
 
 	leftSmallLegBreakDown();
 
 
+
+
+
+	//leg down
+	glPushMatrix();
+	glTranslatef(0, 0.25, 0.1);
+
+	glRotatef(rightLeg5, 1, 0, 0);
+
+
+	glRotatef(rightLeg6, 0, 0, 1);
+
+	glTranslatef(0, -0.25, -0.1);
+	//to centre
+
+	leftFoot();
+
+	glPopMatrix();
+
+
+
+
+
+
+	glPopMatrix();
+
 	glPopMatrix();
 
 
 
 	glPopMatrix();
 
+	//leg middle
+	glPopMatrix();
+
+
+
+	//leg up
 	glPopMatrix();
 }
 
@@ -9555,6 +10208,13 @@ void rightBighand()
 	glVertex3f(0.04, -0.15, -0.04);
 	glVertex3f(0.04, -0.15, 0.04);
 	glVertex3f(0.025, -0.13, 0.025);
+	glVertex3f(0.025, -0.13, -0.025);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glVertex3f(0.025, -0.13, 0.025);
+	glVertex3f(-0.025, -0.13, 0.025);
+	glVertex3f(-0.025, -0.13, -0.025);
 	glVertex3f(0.025, -0.13, -0.025);
 	glEnd();
 
@@ -9911,6 +10571,13 @@ void leftBighand()
 	glVertex3f(0.025, -0.13, -0.025);
 	glEnd();
 
+	glBegin(GL_QUADS);
+	glVertex3f(0.025, -0.13, 0.025);
+	glVertex3f(-0.025, -0.13, 0.025);
+	glVertex3f(-0.025, -0.13, -0.025);
+	glVertex3f(0.025, -0.13, -0.025);
+	glEnd();
+
 	//upperbreak
 	glBegin(GL_POLYGON);
 	glVertex3f(-0.04, -0.20, 0.04);
@@ -9939,6 +10606,8 @@ void leftBighand()
 	glVertex3f(0.04, -0.15, 0.04);
 	glVertex3f(0.04, -0.15, -0.04);
 	glEnd();
+
+
 
 	//outter hand
 	//front
@@ -11187,6 +11856,23 @@ void display()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	//gluLookAt(eyeX, eyeY, eyeZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
+	
+	leftLeg3 += leftLeg3s;
+	leftLeg6 += leftLeg6s;
+	rightLeg1 += rightLeg1s;
+	rightLeg3 += rightLeg3s;
+	rightLeg4 += rightLeg4s;
+	rightLeg6 += rightLeg6s;
+	rotaionhead1 += rotaionhead1s;
+	rotaionhead2 += rotaionhead2s;
+	rotationhandleft += rotationhandlefts;
+	rotationhandleft2 += rotationhandleft2s;
+	rotationhandleft3 += rotationhandleft3s;
+	rotationhandleft4 += rotationhandleft4s;
+	rotationhandright += rotationhandrights;
+	rotationhandright2 += rotationhandright2s;
+	rotationhandright3 += rotationhandright3s;
+
 
 
 
@@ -11250,7 +11936,10 @@ void display()
 	}
 
 	glRotatef(rotaionhead1, 1.0f, 0.0f, 0.0f);
+	
 	glRotatef(rotaionhead2, 0.0f, 1.0f, 0.0f);
+	
+
 	head();
 	glPopMatrix();
 
@@ -11273,6 +11962,8 @@ void display()
 	glTranslatef(0.0f, 0.325f, 0.0f);
 
 	glRotatef(rotationhandleft, 1.0f, 0.0f, 0.0f);
+
+
 
 	glTranslatef(0.0f, -0.325f, 0.0f);
 
@@ -11309,7 +12000,9 @@ void display()
 	glRotatef(-rotationhandleft2, 0.0f, 0.0f, 1.0f);
 
 
+
 	glRotatef(-rotationhandleft3, 0.0f, 1.0f, 0.0f);
+
 
 	glTranslatef(0.0, -0.05, 0.0);
 
@@ -11327,6 +12020,7 @@ void display()
 	}
 
 	glRotatef(rotationhandleft4, 1.0f, 0.0f, 0.0f);
+
 
 	glTranslatef(0, +0.14, 0);
 	leftBighand();
@@ -11350,6 +12044,8 @@ void display()
 	glTranslatef(0.0f, 0.325f, 0.0f);
 
 	glRotatef(rotationhandright, 1.0f, 0.0f, 0.0f);
+
+
 
 	glTranslatef(0.0f, -0.325f, 0.0f);
 
@@ -11375,8 +12071,8 @@ void display()
 		rotationhandright2 = 40;
 	}
 
-	if (rotationhandright2 < -5) {
-		rotationhandright2 = -5;
+	if (rotationhandright2 < -10) {
+		rotationhandright2 = -10;
 	}
 
 	if (rotationhandright3 >= 90) {
@@ -11389,7 +12085,12 @@ void display()
 
 	glRotatef(rotationhandright2, 0.0f, 0.0f, 1.0f);
 
+
+
+
 	glRotatef(rotationhandright3, 0.0f, 1.0f, 0.0f);
+
+
 
 	glTranslatef(0.0, -0.05, 0.0);
 
@@ -11444,6 +12145,20 @@ void display()
 	}
 	else if (transform == 0) {
 		backAnimation();
+	}
+
+	if (pose1 == 1) {
+		pose1a();
+	}
+	else if (pose1 == 0) {
+		pose1ab();
+	}
+
+	if (pose2 == 1) {
+		pose2a();
+	}
+	else if (pose2 == 0) {
+		pose2ab();
 	}
 
 	if (rightSaberB == 1) {
