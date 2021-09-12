@@ -1,3 +1,5 @@
+
+
 #include <Windows.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
@@ -27,7 +29,8 @@ HBITMAP hBMP4 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "logo4.bmp", IMAGE_BIT
 
 GLuint logo5 = 0;
 BITMAP BMP5;
-HBITMAP hBMP5 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "space.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
+HBITMAP hBMP5 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "space2.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
+
 
 int transform = -1;
 
@@ -146,6 +149,7 @@ GLUquadricObj* ball1 = gluNewQuadric();
 GLUquadricObj* ball2 = gluNewQuadric();
 GLUquadricObj* tiang1 = gluNewQuadric();
 GLUquadricObj* tiang2 = gluNewQuadric();
+GLUquadricObj* space = gluNewQuadric();
 
 
 float rotationSpeedfoot = 0.00;
@@ -216,7 +220,6 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				question++;
 			}
 		}
-
 		if (wParam == VK_F1) {
 			if (question > 1) {
 				question--;
@@ -244,7 +247,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 
 		if (wParam == VK_SPACE) {
-			
+
 
 			if (transform == -1) {
 				transform = 1;
@@ -384,7 +387,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		}
 
 		if (wParam == 0x32) {  //2
-			
+
 			if (rightSaberB == -1) {
 				rightSaberB = 1;
 			}
@@ -394,9 +397,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			else if (rightSaberB == 0) {
 				rightSaberB = 1;
 			}
-			
 
-			
+
+
 		}
 
 
@@ -588,14 +591,12 @@ void head()
 
 	glTranslatef(0.0f, 0.10f, 0.06f);
 
-	if (rotationfaceb > 75) {
+	if (rotationfaceb >= 75) {
 		rotationfaceb = 75;
-		rotationSpeedfaceb = 0;
 	}
 
 	if (rotationfaceb < 0) {
 		rotationfaceb = 0;
-		rotationSpeedfaceb = 0;
 	}
 
 	rotationfaceb += rotationSpeedfaceb;
@@ -950,7 +951,6 @@ void head()
 	glRotatef(rotationheadsidea, 1.0f, 0.0f, 0.0f);
 	if (rotationheadsidea >= 180) {
 		rotationheadsidea = 180;
-		rotationheadsidespeed = 0;
 	}
 
 	if (rotationheadsidea < 0) {
@@ -1138,7 +1138,6 @@ void head()
 
 	if (rotationheadsideb >= 180) {
 		rotationheadsideb = 180;
-		rotationheadsidespeed = 0;
 	}
 
 	if (rotationheadsideb < 0) {
@@ -2135,7 +2134,7 @@ void waist()
 void body()
 {
 	//waist lower armor
-	
+
 
 	//waist upper armor
 	glPushMatrix();
@@ -2308,9 +2307,8 @@ void body()
 	//left bra
 	glPushMatrix();
 
-	if (rotationbra > 100) {
+	if (rotationbra >= 100) {
 		rotationbra = 100;
-		rotationSpeedbra = 0;
 	}
 	if (rotationbra < 0) {
 		rotationbra = 0;
@@ -2400,9 +2398,8 @@ void body()
 	//right bra
 	glPushMatrix();
 
-	if (rotationbra > 100) {
+	if (rotationbra >= 100) {
 		rotationbra = 100;
-		rotationSpeedbra = 0;
 	}
 	if (rotationbra < 0) {
 		rotationbra = 0;
@@ -2853,7 +2850,6 @@ void body()
 
 	if (rotationarmor >= 0.01) {
 		rotationarmor = 0.01;
-		rotationSpeedarmor = 0;
 	}
 
 	if (rotationarmor < 0.0) {
@@ -3868,7 +3864,6 @@ void body()
 
 	if (rotationdoor <= -40) {
 		rotationdoor = -40;
-		rotationSpeeddoor = 0;
 	}
 
 	if (rotationdoor > 0) {
@@ -3894,22 +3889,22 @@ void body()
 
 	glEnd();
 
-	glEnable( GL_TEXTURE_2D );
+	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, logo1);
 	glBegin(GL_QUADS);//outside up
 
 	glColor3f(1.0f, 1.0f, 1.0f);
-	glTexCoord2f(0.30f, 0.80f);
+	glTexCoord2f(0.31f, 0.80f);
 	glVertex3f(-0.075f, 0.3625f, 0.1375f);
-	glTexCoord2f(0.70f, 0.80f);
+	glTexCoord2f(0.71f, 0.80f);
 	glVertex3f(0.075f, 0.3625f, 0.1375f);
-	glTexCoord2f(0.60f, 0.0f);
+	glTexCoord2f(0.61f, 0.0f);
 	glVertex3f(0.05f, 0.25f, 0.25f);
-	glTexCoord2f(0.40f, 0.0f);
+	glTexCoord2f(0.41f, 0.0f);
 	glVertex3f(-0.05f, 0.25f, 0.25f);
 
 	glEnd();
-	glDisable( GL_TEXTURE_2D );
+	glDisable(GL_TEXTURE_2D);
 
 	glBegin(GL_QUADS);//outside down
 
@@ -5668,10 +5663,10 @@ void shield()
 	if (rotationsheild >= 0.28f) {
 		rotationsheild = 0.28f;
 
-		rotationSpeedfan = 0.06;
+		rotationSpeedfan = 0.2;
 	}
 	else {
-		rotationSpeedfan = -0.06;
+		rotationSpeedfan = -0.2;
 	}
 
 	if (rotationsheild < 0.0) {
@@ -5681,7 +5676,10 @@ void shield()
 	rotationsheild += rotationSpeedsheild;
 	glTranslatef(0.0f, -rotationsheild, 0.0f);
 
+
+
 	glTranslatef(0.0f, 0.28f, 0.0f);
+
 	glBegin(GL_QUADS);//up back
 
 	glColor3f(0.80f, 0.80f, 0.80f);
@@ -5692,15 +5690,25 @@ void shield()
 
 	glEnd();
 
+
 	glBegin(GL_QUADS);//up front
 
 	glColor3f(0.60f, 0.60f, 0.60f);
+
+
 	glVertex3f(0.05, 0.0f, 0.045f);
+
+
 	glVertex3f(0.105, -0.15f, 0.060f);
+
+
 	glVertex3f(-0.105, -0.15f, 0.060f);
+
+
 	glVertex3f(-0.05, 0.0f, 0.045f);
 
 	glEnd();
+
 
 	glBegin(GL_QUADS);//up left
 
@@ -5722,9 +5730,9 @@ void shield()
 
 	glEnd();
 
-	glBegin(GL_QUADS);//up out front 1
+	glBegin(GL_QUADS);//up out front 1 logo
 
-	glColor3f(0.000f, 0.900f, 0.900f);
+	glColor3f(1.000f, 1.000f, 1.000f);
 	glVertex3f(0.05, 0.0f, 0.070f);
 	glVertex3f(0.105, -0.15f, 0.070f);
 	glVertex3f(-0.105, -0.15f, 0.070f);
@@ -5742,9 +5750,29 @@ void shield()
 
 	glEnd();
 
+
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, logo2);
+	glBegin(GL_QUADS);//logo
+
+	glColor3f(1.00f, 1.00f, 1.00f);
+
+	glTexCoord2f(0.60f, 0.0f);
+	glVertex3f(0.05, -0.30f, 0.0701f);//down right
+	glTexCoord2f(0.40f, 0.0f);
+	glVertex3f(-0.05, -0.30f, 0.0701f);//down left
+	glTexCoord2f(0.40f, 1.0f);
+	glVertex3f(-0.05, 0.0f, 0.0701f);//up left
+	glTexCoord2f(0.60f, 1.0f);
+	glVertex3f(0.05, 0.0f, 0.0701f);//up right
+
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+
 	glBegin(GL_QUADS);//up out front 2 logo
 
-	glColor3f(0.000f, 0.900f, 0.900f);
+	glColor3f(1.000f, 1.000f, 1.000f);
+
 	glVertex3f(0.05, -0.30f, 0.070f);
 	glVertex3f(0.105, -0.15f, 0.070f);
 	glVertex3f(-0.105, -0.15f, 0.070f);
@@ -5761,6 +5789,7 @@ void shield()
 	glVertex3f(-0.05, -0.30f, 0.060f);
 
 	glEnd();
+
 
 	glBegin(GL_QUADS);//up out front 1 up
 
@@ -6649,7 +6678,7 @@ void sifat()
 	glEnd();
 
 	glPopMatrix();
-	
+
 
 
 	//left underwear
@@ -7184,7 +7213,7 @@ void sifat()
 
 	rotationbelt3 += rotationSpeedbelt3;
 
-	glTranslatef(0.0f, rotationbelt3 , rotationbelt3);
+	glTranslatef(0.0f, rotationbelt3, rotationbelt3);
 
 	glBegin(GL_QUADS);//front
 
@@ -7253,23 +7282,23 @@ void sifat()
 
 
 void rightSaberAnimation() {
-	
-		saberRotationSpeed = 0.1f;
 
-		if (saberRotation == 180) {
-			saberYSpeed = 0.0002f;
-		}
-	
+	saberRotationSpeed = 0.1f;
+
+	if (saberRotation == 180) {
+		saberYSpeed = 0.0002f;
+	}
+
 }
 
 void rightSaberAnimationBack() {
-	
-		saberYSpeed = -0.0002f;
 
-		if (saberY == -0.16f) {
-			saberRotationSpeed = -0.1f;
-		}
-	
+	saberYSpeed = -0.0002f;
+
+	if (saberY == -0.16f) {
+		saberRotationSpeed = -0.1f;
+	}
+
 }
 
 void leftSaberAnimation() {
@@ -7294,7 +7323,7 @@ void leftSaberAnimationBack() {
 
 void animation() {
 
-	rotationSpeedsheild = 0.002;
+	rotationSpeedsheild = 0.0015;
 
 	if (rotationFoot < 27.5) {
 		rotationSpeedfoot = 0.06f;
@@ -7328,15 +7357,15 @@ void animation() {
 	if (rotationbelt2 == 40) {
 
 		rotationSpeedwaist = 0.0002f;
-		
+
 	}
 
-	if (rotationwaist == 0.03f) {
+	if (rotationwaist >= 0.03f) {
 		rotationSpeedbra = 0.18;
 		rotationSpeedarmor = 0.00006f;
 	}
 
-	if (rotationbra == 100) {
+	if (rotationbra >= 100) {
 		lowerHandBreakSpeed = 0.00010f;
 	}
 
@@ -7346,7 +7375,7 @@ void animation() {
 		rotationSpeedshouder4 = 0.00004f;
 		rotationSpeedshouder3 = 0.12f;
 
-		if (rotationshouder1 == 0.02f) {
+		if (rotationshouder1 >= 0.02f) {
 			rotationheadsidespeed = 0.6f;
 			rotationSpeedfacea = 0.24f;
 			rotationSpeedfaceb = -0.24f;
@@ -7367,14 +7396,14 @@ void animation() {
 
 	//head
 
-	
 
 
-	
+
+
 }
 
 void backAnimation() {
-	
+
 	rotationSpeedsheild = -0.002;
 
 	rotationSpeedshouder1 = -0.0004f;
@@ -7436,10 +7465,10 @@ void backAnimation() {
 			whiteLockerSpeedY = -0.0005f;
 			whiteLockerSpeedZ = -0.00010f;
 
-			
+
 		}
 
-		
+
 	}
 
 	if (rotationFoot == 0.0f) {
@@ -7452,10 +7481,10 @@ void backAnimation() {
 
 	}
 
-	
+
 
 	//---------------------------------------
-	
+
 
 }
 
@@ -10994,7 +11023,7 @@ void rightpunch()
 	if (handsaber2 == 1) {
 		handsaber2speed += 0.001;
 
-		if (handsaber2speed >=0.8) {
+		if (handsaber2speed >= 0.8) {
 			handsaber2speed = 0.8;
 		}
 
@@ -11083,6 +11112,22 @@ void arm() {
 	hand();
 }
 
+void background()
+{
+	//space
+	glEnable(GL_TEXTURE_2D);
+	gluQuadricTexture(space, GL_TRUE & logo5);
+	glPushMatrix();
+
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glRotatef(90, 1.0f, 0.0f, 0.0f);
+	gluSphere(space, 5.0, 18, 18);//radius,slices,stacks
+	glColor3f(1.0f, 1.0f, 1.0f);
+
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+}
+
 void display()
 {
 	//--------------------------------
@@ -11137,10 +11182,12 @@ void display()
 	glDisable(GL_TEXTURE_2D);
 
 
+
 	glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	//gluLookAt(eyeX, eyeY, eyeZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
+
 
 
 	glTranslatef(0.0f, -0.0f, -3.0f);
@@ -11154,28 +11201,9 @@ void display()
 
 	glRotatef(rotation, 0.0f, 1.0f, 0.0f);
 
-	glBegin(GL_LINE_LOOP);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glVertex3f(1.0f, 0.00f, 0.00f);
-	glVertex3f(-1.0f, 0.00f, 0.00f);
-
-	glEnd();
-
-	glBegin(GL_LINE_LOOP);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glVertex3f(0.0f, 1.00f, 0.00f);
-	glVertex3f(0.0f, -1.00f, 0.00f);
-
-	glEnd();
 
 
-	//sheild
-	//glPushMatrix();
-	//glTranslatef(0.0f, 0.0f, 0.3f);
-	//shield();
-	//glPopMatrix();
-
-
+	background();
 
 
 	glPushMatrix();
@@ -11189,15 +11217,13 @@ void display()
 	//upper body
 	glPushMatrix();
 
-	if (rotationwaist > 0.03f) {
+	if (rotationwaist >= 0.03f) {
 		rotationwaist = 0.03f;
-		rotationSpeedwaist = 0;
 	}
 
 	if (rotationwaist < 0.0) {
 		rotationwaist = 0.0;
-		rotationSpeedwaist = 0;
-
+		rotationSpeedwaist = 0.0;
 	}
 
 	rotationwaist += rotationSpeedwaist;
@@ -11461,6 +11487,8 @@ void display()
 	sifat();
 	glPopMatrix();
 
+
+
 	glDeleteTextures(1, &logo1);
 	glDeleteTextures(1, &logo2);
 	glDeleteTextures(1, &logo3);
@@ -11557,4 +11585,3 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 	DeleteObject(hBMP5);
 	return true;
 }
-//------------------------------------------------
