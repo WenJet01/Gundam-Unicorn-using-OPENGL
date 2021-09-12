@@ -110,6 +110,10 @@ float rotationSpeedbelt6 = 0;
 float updown = 1;
 float rotaionhead1 = 0;
 float rotaionhead2 = 0;
+float handsaber1 = 0;
+float handsaber2 = 0;
+float handsaber1speed = 0;
+float handsaber2speed = 0;
 
 GLUquadricObj* headtop = gluNewQuadric();
 GLUquadricObj* neck1 = gluNewQuadric();
@@ -281,6 +285,27 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 		if (wParam == VK_SHIFT) {  //SHIFT
 			updown = updown * -1;
+		}
+
+		if (wParam == 0x33) {  //3
+
+			if (handsaber1 == 0) {
+				handsaber1 = 1;
+			}
+
+			else{
+				handsaber1 = 0;
+			}
+		}
+
+		if (wParam == 0x34) {  //4
+			if (handsaber2 == 0) {
+				handsaber2 = 1;
+			}
+
+			else {
+				handsaber2 = 0;
+			}
 		}
 
 		if (wParam == 0x52) {  //R
@@ -10402,6 +10427,92 @@ void leftpunch()
 	glVertex3f(0.025, -0.36, 0.04);
 	glVertex3f(0.025, -0.36, 0.02);
 	glEnd();
+
+	if (handsaber1 == 1) {
+		handsaber1speed += 0.001;
+
+		if (handsaber1speed >= 0.8) {
+			handsaber1speed = 0.8;
+		}
+
+		//lasersword
+		glBegin(GL_POLYGON);//upper
+		glColor3f(0.7, 0.7, 0.7);
+		glVertex3f(-0.010, -0.36, -0.08);
+		glVertex3f(-0.010, -0.36, 0.08);
+		glVertex3f(0.025, -0.36, 0.08);
+		glVertex3f(0.025, -0.36, -0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//lower
+		glColor3f(0.7, 0.7, 0.7);
+		glVertex3f(-0.010, -0.385, -0.08);
+		glVertex3f(-0.010, -0.385, 0.08);
+		glVertex3f(0.025, -0.385, 0.08);
+		glVertex3f(0.025, -0.385, -0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//left
+		glColor3f(0.8, 0.8, 0.8);
+		glVertex3f(0.025, -0.36, 0.08);
+		glVertex3f(0.025, -0.36, -0.08);
+		glVertex3f(0.025, -0.385, -0.08);
+		glVertex3f(0.025, -0.385, 0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//right
+		glColor3f(0.8, 0.8, 0.8);
+		glVertex3f(-0.010, -0.36, -0.08);
+		glVertex3f(-0.010, -0.36, 0.08);
+		glVertex3f(-0.010, -0.385, 0.08);
+		glVertex3f(-0.010, -0.385, -0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//back
+		glColor3f(0.4, 0.4, 0.4);
+		glVertex3f(-0.010, -0.36, -0.08);
+		glVertex3f(0.025, -0.36, -0.08);
+		glVertex3f(0.025, -0.385, -0.08);
+		glVertex3f(-0.010, -0.385, -0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//front 1
+		glColor3f(0.898, 0.388, 1);
+		glVertex3f(-0.010, -0.36, 0.08);
+		glVertex3f(0.025, -0.36, 0.08);
+		glVertex3f(0.0075, -0.3725, 0.08 + handsaber1speed);
+		glVertex3f(0.0075, -0.3725, 0.08 + handsaber1speed);
+		glEnd();
+
+		glBegin(GL_POLYGON);//front 2
+		glColor3f(0.898, 0.388, 1);
+		glVertex3f(0.025, -0.36, 0.08);
+		glVertex3f(0.0075, -0.3725, 0.08 + handsaber1speed);
+		glVertex3f(0.0075, -0.3725, 0.08 + handsaber1speed);
+		glVertex3f(0.025, -0.385, 0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//front 3
+		glColor3f(0.898, 0.388, 1);
+		glVertex3f(0.025, -0.385, 0.08);
+		glVertex3f(-0.010, -0.385, 0.08);
+		glVertex3f(0.0075, -0.3725, 0.08 + handsaber1speed);
+		glVertex3f(0.0075, -0.3725, 0.08 + handsaber1speed);
+		glEnd();
+
+		glBegin(GL_POLYGON);//front 2
+		glColor3f(0.898, 0.388, 1);
+		glVertex3f(-0.010, -0.36, 0.08);
+		glVertex3f(0.0075, -0.3725, 0.08 + handsaber1speed);
+		glVertex3f(0.0075, -0.3725, 0.08 + handsaber1speed);
+		glVertex3f(-0.010, -0.385, 0.08);
+		glEnd();
+	}
+
+	else {
+		handsaber1speed = 0;
+	}
+
 	glPopMatrix();
 }
 
@@ -10757,6 +10868,92 @@ void rightpunch()
 	glVertex3f(-0.025, -0.36, 0.04);
 	glVertex3f(-0.025, -0.36, 0.02);
 	glEnd();
+
+	if (handsaber2 == 1) {
+		handsaber2speed += 0.001;
+
+		if (handsaber2speed >=0.8) {
+			handsaber2speed = 0.8;
+		}
+
+		//lasersword
+		glBegin(GL_POLYGON);//upper
+		glColor3f(0.7, 0.7, 0.7);
+		glVertex3f(0.010, -0.36, -0.08);
+		glVertex3f(0.010, -0.36, 0.08);
+		glVertex3f(-0.025, -0.36, 0.08);
+		glVertex3f(-0.025, -0.36, -0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//lower
+		glColor3f(0.7, 0.7, 0.7);
+		glVertex3f(0.010, -0.385, -0.08);
+		glVertex3f(0.010, -0.385, 0.08);
+		glVertex3f(-0.025, -0.385, 0.08);
+		glVertex3f(-0.025, -0.385, -0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//left
+		glColor3f(0.8, 0.8, 0.8);
+		glVertex3f(-0.025, -0.36, 0.08);
+		glVertex3f(-0.025, -0.36, -0.08);
+		glVertex3f(-0.025, -0.385, -0.08);
+		glVertex3f(-0.025, -0.385, 0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//right
+		glColor3f(0.8, 0.8, 0.8);
+		glVertex3f(0.010, -0.36, -0.08);
+		glVertex3f(0.010, -0.36, 0.08);
+		glVertex3f(0.010, -0.385, 0.08);
+		glVertex3f(0.010, -0.385, -0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//back
+		glColor3f(0.4, 0.4, 0.4);
+		glVertex3f(0.010, -0.36, -0.08);
+		glVertex3f(-0.025, -0.36, -0.08);
+		glVertex3f(-0.025, -0.385, -0.08);
+		glVertex3f(0.010, -0.385, -0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//front 1
+		glColor3f(0.898, 0.388, 1);
+		glVertex3f(0.010, -0.36, 0.08);
+		glVertex3f(-0.025, -0.36, 0.08);
+		glVertex3f(-0.0075, -0.3725, 0.08 + handsaber2speed);
+		glVertex3f(-0.0075, -0.3725, 0.08 + handsaber2speed);
+		glEnd();
+
+		glBegin(GL_POLYGON);//front 2
+		glColor3f(0.898, 0.388, 1);
+		glVertex3f(-0.025, -0.36, 0.08);
+		glVertex3f(-0.0075, -0.3725, 0.08 + handsaber2speed);
+		glVertex3f(-0.0075, -0.3725, 0.08 + handsaber2speed);
+		glVertex3f(-0.025, -0.385, 0.08);
+		glEnd();
+
+		glBegin(GL_POLYGON);//front 3
+		glColor3f(0.898, 0.388, 1);
+		glVertex3f(-0.025, -0.385, 0.08);
+		glVertex3f(0.010, -0.385, 0.08);
+		glVertex3f(-0.0075, -0.3725, 0.08 + handsaber2speed);
+		glVertex3f(-0.0075, -0.3725, 0.08 + handsaber2speed);
+		glEnd();
+
+		glBegin(GL_POLYGON);//front 2
+		glColor3f(0.898, 0.388, 1);
+		glVertex3f(0.010, -0.36, 0.08);
+		glVertex3f(-0.0075, -0.3725, 0.08 + handsaber2speed);
+		glVertex3f(-0.0075, -0.3725, 0.08 + handsaber2speed);
+		glVertex3f(0.010, -0.385, 0.08);
+		glEnd();
+	}
+
+	else {
+		handsaber2speed = 0;
+	}
+
 	glPopMatrix();
 }
 
@@ -10781,7 +10978,7 @@ void display()
 
 	coolor();
 
-	glTranslatef(0.0f, -0.0f, -2.0f);
+	glTranslatef(0.0f, -0.0f, -3.0f);
 	glTranslatef(0.0f, -0.0f, 0.0f);
 
 	glRotatef(rotation3, 0.0f, 0.0f, 1.0f);
@@ -10815,6 +11012,8 @@ void display()
 	//glPopMatrix();
 
 
+
+	
 	glPushMatrix();
 	glTranslatef(0.0f, 0.0f, -0.03f);
 
@@ -10875,7 +11074,7 @@ void display()
 
 	glRotatef(-12, 0, 0, 1);
 
-	glTranslatef(-0.33, 0.17, -0.03);
+	glTranslatef(-0.33, 0.17, 0.0);
 
 	glTranslatef(0.0, 0.05, 0.0);
 
@@ -10956,7 +11155,7 @@ void display()
 
 	glPushMatrix();//right hand
 	glRotatef(12, 0, 0, 1);
-	glTranslatef(0.35, 0.17, -0.03);
+	glTranslatef(0.35, 0.17, -0.00);
 
 	glTranslatef(0.0, 0.05, 0.0);
 
@@ -11073,7 +11272,7 @@ void display()
 	sifat();
 	glPopMatrix();
 
-
+	
 
 
 	//--------------------------------
