@@ -104,6 +104,18 @@ float rotationhandright3 = 0;
 float rotationhandleft4 = 0;
 float rotationhandright4 = 0;
 
+float rotationhandlefts = 0;
+float rotationhandrights = 0;
+
+float rotationhandleft2s = 0;
+float rotationhandright2s = 0;
+
+float rotationhandleft3s = 0;
+float rotationhandright3s = 0;
+
+float rotationhandleft4s = 0;
+float rotationhandright4s = 0;
+
 float rotationfan = 0;
 float rotationSpeedfan = 0;
 
@@ -130,7 +142,9 @@ float rotationSpeedbelt6 = 0;
 
 float updown = 1;
 float rotaionhead1 = 0;
+float rotaionhead1s = 0;
 float rotaionhead2 = 0;
+float rotaionhead2s = 0;
 float handsaber1 = 0;
 float handsaber2 = 0;
 float handsaber1speed = 0;
@@ -212,6 +226,12 @@ float rightLeg3 = 0.0f;
 float rightLeg4 = 0.0f;
 float rightLeg5 = 0.0f;
 float rightLeg6 = 0.0f;
+float rightLeg1s = 0.0f;
+float rightLeg2s = 0.0f;
+float rightLeg3s = 0.0f;
+float rightLeg4s = 0.0f;
+float rightLeg5s = 0.0f;
+float rightLeg6s = 0.0f;
 
 float leftLeg1 = 0.0f;
 float leftLeg2 = 0.0f;
@@ -219,8 +239,17 @@ float leftLeg3 = 0.0f;
 float leftLeg4 = 0.0f;
 float leftLeg5 = 0.0f;
 float leftLeg6 = 0.0f;
+float leftLeg1s = 0.0f;
+float leftLeg2s = 0.0f;
+float leftLeg3s = 0.0f;
+float leftLeg4s = 0.0f;
+float leftLeg5s = 0.0f;
+float leftLeg6s = 0.0f;
 
 GLuint texture = 0;
+
+int pose1 = -1;
+int pose2 = -1;
 
 
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -384,10 +413,30 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 
 		if (wParam == 0x58) {  //X
+			//pose 1
+			if (pose1 == -1) {
+				pose1 = 1;
+			}
+			else if (pose1 == 1) {
+				pose1 = 0;
+			}
+			else if (pose1 == 0) {
+				pose1 = 1;
+			}
 
 		}
 
 		if (wParam == 0x43) {  //C
+			//pose 2
+			if (pose2 == -1) {
+				pose2 = 1;
+			}
+			else if (pose2 == 1) {
+				pose2 = 0;
+			}
+			else if (pose2 == 0) {
+				pose2 = 1;
+			}
 
 		}
 
@@ -506,6 +555,341 @@ bool initPixelFormat(HDC hdc)
 
 //--------------------------------------------------------------------
 
+void pose1a() {
+	leftLeg3s = -0.1f;
+	leftLeg6s = 0.1f;
+	rightLeg1s = -0.1f;
+	rightLeg3s = 0.1f;
+	rightLeg4s = 0.1f;
+	rightLeg6s = -0.1f;
+
+	rotaionhead1s = 0.05f;
+	rotaionhead2s = 0.05f;
+
+	rotationhandlefts = 0.1f;
+	rotationhandleft2s = 0.1f;
+	rotationhandleft3s = 0.1f;
+	rotationhandleft4s = 0.1f;
+
+	rotationhandrights = -0.1f;
+	rotationhandright2s = -0.1f;
+	rotationhandright3s = -0.1f;
+
+	if (leftLeg3 <= -30) {
+		leftLeg3 = -30;
+		leftLeg3s = 0.0f;
+	}
+	if (leftLeg6 >= 30) {
+		leftLeg6 = 30;
+		leftLeg6s = 0.0f;
+	}
+	if (rightLeg1 <= -40) {
+		rightLeg1 = -40;
+		rightLeg1s = 0.0f;
+	}
+	if (rightLeg3 >= 40) {
+		rightLeg3 = 40;
+		rightLeg3s = 0.0f;
+	}
+	if (rightLeg4 >= 40) {
+		rightLeg4 = 40;
+		rightLeg4s = 0.0f;
+	}
+	if (rightLeg6 <= -30) {
+		rightLeg6 = -30;
+		rightLeg6s = 0.0f;
+	}
+	if (rotaionhead1 >= 20) {
+		rotaionhead1 = 20;
+		rotaionhead1s = 0.0f;
+	}
+	if (rotaionhead2 >= 40) {
+		rotaionhead2 = 40;
+		rotaionhead2s = 0.0f;
+	}
+	if (rotationhandleft >= 40) {
+		rotationhandleft = 40;
+		rotationhandlefts = 0.0f;
+	}
+	if (rotationhandleft2 >= 50) {
+		rotationhandleft2 = 50;
+		rotationhandleft2s = 0.0f;
+	}
+	if (rotationhandleft3 >= 50) {
+		rotationhandleft3 = 50;
+		rotationhandleft3s = 0.0f;
+	}
+	if (rotationhandleft4 >= 50) {
+		rotationhandleft4 = 50;
+		rotationhandleft4s = 0.0f;
+	}
+	if (rotationhandright <= -70) {
+		rotationhandright = -70;
+		rotationhandrights = 0.0f;
+	}
+	if (rotationhandright2 <= -10) {
+		rotationhandright2 = -10;
+		rotationhandright2s = 0.0f;
+	}
+	if (rotationhandright3 <= -20) {
+		rotationhandright3 = -20;
+		rotationhandright3s = 0.0f;
+	}
+}
+
+void pose1ab() {
+	leftLeg3s = 0.1f;
+	leftLeg6s = -0.1f;
+	rightLeg1s = 0.1f;
+	rightLeg3s = -0.1f;
+	rightLeg4s = -0.1f;
+	rightLeg6s = 0.1f;
+
+	rotaionhead1s = -0.05f;
+	rotaionhead2s = -0.05f;
+
+	rotationhandlefts = -0.1f;
+	rotationhandleft2s = -0.1f;
+	rotationhandleft3s = -0.1f;
+	rotationhandleft4s = -0.1f;
+
+	rotationhandrights = 0.1f;
+	rotationhandright2s = 0.1f;
+	rotationhandright3s = 0.1f;
+
+	if (leftLeg3 > 0) {
+		leftLeg3 = 0;
+		leftLeg3s = 0.0f;
+	}
+	if (leftLeg6 < 0) {
+		leftLeg6 = 0;
+		leftLeg6s = 0.0f;
+	}
+	if (rightLeg1 > 0) {
+		rightLeg1 = 0;
+		rightLeg1s = 0.0f;
+	}
+	if (rightLeg3 < 0) {
+		rightLeg3 = 0;
+		rightLeg3s = 0.0f;
+	}
+	if (rightLeg4 <0) {
+		rightLeg4 = 0;
+		rightLeg4s = 0.0f;
+	}
+	if (rightLeg6 > 0) {
+		rightLeg6 = 0;
+		rightLeg6s = 0.0f;
+	}
+	if (rotaionhead1 < 0) {
+		rotaionhead1 = 0;
+		rotaionhead1s = 0.0f;
+	}
+	if (rotaionhead2 < 0) {
+		rotaionhead2 = 0;
+		rotaionhead2s = 0.0f;
+	}
+	if (rotationhandleft < 0) {
+		rotationhandleft = 0;
+		rotationhandlefts = 0.0f;
+	}
+	if (rotationhandleft2 < 0) {
+		rotationhandleft2 = 0;
+		rotationhandleft2s = 0.0f;
+	}
+	if (rotationhandleft3 < 0) {
+		rotationhandleft3 = 0;
+		rotationhandleft3s = 0.0f;
+	}
+	if (rotationhandleft4 < 0) {
+		rotationhandleft4 = 0;
+		rotationhandleft4s = 0.0f;
+	}
+	if (rotationhandright > 0) {
+		rotationhandright = 0;
+		rotationhandrights = 0.0f;
+	}
+	if (rotationhandright2 > 0) {
+		rotationhandright2 = 0;
+		rotationhandright2s = 0.0f;
+	}
+	if (rotationhandright3 > 0) {
+		rotationhandright3 = 0;
+		rotationhandright3s = 0.0f;
+	}
+}
+
+void pose2a() {
+	leftLeg1 = 20;
+	leftLeg3 = -10;
+	leftLeg4 = 20;
+	leftLeg5 = 30; //1
+	rightLeg1 = -50;
+	rightLeg3 = 10;
+	rightLeg4 = 80;
+	rightLeg5 = 50;
+
+	rotaionhead2 = -30;
+
+	rotationhandleft = -40;
+	rotationhandleft2 = -45;
+	
+
+	rotationhandright = -100;
+	rotationhandright3 = -90;
+	rotationhandright4 = -80;
+
+	/*if (leftLeg1 >= 20) {
+		leftLeg3 = -30;
+		leftLeg3s = 0.0f;
+	}
+	if (leftLeg3 <= -10) {
+		leftLeg6 = 30;
+		leftLeg6s = 0.0f;
+	}
+	if (leftLeg4 <= 20) {
+		leftLeg3 = -30;
+		leftLeg3s = 0.0f;
+	}
+	if (leftLeg6 >= 30) {
+		leftLeg6 = 30;
+		leftLeg6s = 0.0f;
+	}
+	if (rightLeg1 <= -40) {
+		rightLeg1 = -40;
+		rightLeg1s = 0.0f;
+	}
+	if (rightLeg3 >= 40) {
+		rightLeg3 = 40;
+		rightLeg3s = 0.0f;
+	}
+	if (rightLeg4 >= 40) {
+		rightLeg4 = 40;
+		rightLeg4s = 0.0f;
+	}
+	if (rightLeg6 <= -30) {
+		rightLeg6 = -30;
+		rightLeg6s = 0.0f;
+	}
+	if (rotaionhead1 >= 20) {
+		rotaionhead1 = 20;
+		rotaionhead1s = 0.0f;
+	}
+	if (rotaionhead2 >= 40) {
+		rotaionhead2 = 40;
+		rotaionhead2s = 0.0f;
+	}
+	if (rotationhandleft >= 40) {
+		rotationhandleft = 40;
+		rotationhandlefts = 0.0f;
+	}
+	if (rotationhandleft2 >= 50) {
+		rotationhandleft2 = 50;
+		rotationhandleft2s = 0.0f;
+	}
+	if (rotationhandleft3 >= 50) {
+		rotationhandleft3 = 50;
+		rotationhandleft3s = 0.0f;
+	}
+	if (rotationhandleft4 >= 50) {
+		rotationhandleft4 = 50;
+		rotationhandleft4s = 0.0f;
+	}
+	if (rotationhandright <= -70) {
+		rotationhandright = -70;
+		rotationhandrights = 0.0f;
+	}
+	if (rotationhandright2 <= -10) {
+		rotationhandright2 = -10;
+		rotationhandright2s = 0.0f;
+	}
+	if (rotationhandright3 <= -20) {
+		rotationhandright3 = -20;
+		rotationhandright3s = 0.0f;
+	}*/
+}
+
+void pose2ab() {
+	leftLeg1 = 0;
+	leftLeg3 = 0;
+	leftLeg4 = 0;
+	leftLeg5 = 0; //1
+	rightLeg1 = 0;
+	rightLeg3 = 0;
+	rightLeg4 = 0;
+	rightLeg5 = 0;
+
+	rotaionhead2 = 0;
+
+	rotationhandleft = 0;
+	rotationhandleft2 = 0;
+
+
+	rotationhandright = 0;
+	rotationhandright3 = 0;
+	rotationhandright4 = 0;
+
+	/*if (leftLeg3 > 0) {
+		leftLeg3 = 0;
+		leftLeg3s = 0.0f;
+	}
+	if (leftLeg6 < 0) {
+		leftLeg6 = 0;
+		leftLeg6s = 0.0f;
+	}
+	if (rightLeg1 > 0) {
+		rightLeg1 = 0;
+		rightLeg1s = 0.0f;
+	}
+	if (rightLeg3 < 0) {
+		rightLeg3 = 0;
+		rightLeg3s = 0.0f;
+	}
+	if (rightLeg4 < 0) {
+		rightLeg4 = 0;
+		rightLeg4s = 0.0f;
+	}
+	if (rightLeg6 > 0) {
+		rightLeg6 = 0;
+		rightLeg6s = 0.0f;
+	}
+	if (rotaionhead1 < 0) {
+		rotaionhead1 = 0;
+		rotaionhead1s = 0.0f;
+	}
+	if (rotaionhead2 < 0) {
+		rotaionhead2 = 0;
+		rotaionhead2s = 0.0f;
+	}
+	if (rotationhandleft < 0) {
+		rotationhandleft = 0;
+		rotationhandlefts = 0.0f;
+	}
+	if (rotationhandleft2 < 0) {
+		rotationhandleft2 = 0;
+		rotationhandleft2s = 0.0f;
+	}
+	if (rotationhandleft3 < 0) {
+		rotationhandleft3 = 0;
+		rotationhandleft3s = 0.0f;
+	}
+	if (rotationhandleft4 < 0) {
+		rotationhandleft4 = 0;
+		rotationhandleft4s = 0.0f;
+	}
+	if (rotationhandright > 0) {
+		rotationhandright = 0;
+		rotationhandrights = 0.0f;
+	}
+	if (rotationhandright2 > 0) {
+		rotationhandright2 = 0;
+		rotationhandright2s = 0.0f;
+	}
+	if (rotationhandright3 > 0) {
+		rotationhandright3 = 0;
+		rotationhandright3s = 0.0f;
+	}*/
+}
 
 void head()
 {
@@ -7337,6 +7721,14 @@ void animation() {
 	}
 
 	if (thrusterRotation == 30) {
+		downKneeBreakSpeed = 0.0001f;
+	}
+
+	if (downKneeBreak == 0.02f) {
+		upKneeRotationSpeed = 0.05f;
+	}
+
+	if (upKneeRotation == 25) {
 		upperLegBreakSpeed = 0.0001f;
 	}
 
@@ -7445,9 +7837,17 @@ void backAnimation() {
 	}
 
 	if (upperLegBreak == 0.0) {
+		upKneeRotationSpeed = -0.05f;
+
+	}
+
+	if (upKneeRotation == 0) {
+		downKneeBreakSpeed = -0.0001f;
+	}
+
+	if (downKneeBreak == 0.0f) {
 		thrusterRotationSpeed = -0.050f;
 		redThrusterRotationSpeed = -0.02f;
-
 	}
 
 	if (redThrusterRotation == 0.0) {
@@ -9152,7 +9552,7 @@ void rightArmJoints() {
 
 void knee() {
 	//red inside
-	glColor3f(1,0,0);
+	glColor3f(colorr,colorg,colorb);
 
 	//left
 	glBegin(GL_POLYGON);
@@ -9320,9 +9720,11 @@ void leftLeg() {
 	////////glRotatef(-5, 0, 0, 1);
 	glRotatef(leftLeg1, 1, 0, 0);
 
+
 	glRotatef(leftLeg2, 0, 1, 0);
 
 	glRotatef(leftLeg3, 0, 0, 1);
+
 	
 	
 
@@ -9378,7 +9780,8 @@ void leftLeg() {
 	glTranslatef(0, 0.65, 0.1);
 
 	glRotatef(leftLeg4, 1, 0, 0);
-	//glRotatef(40, 1, 0, 0);
+
+
 	glTranslatef(0, -0.65, -0.1);
 	//to centre
 
@@ -9446,6 +9849,8 @@ void leftLeg() {
 	glTranslatef(0, 0.25, 0.1);
 
 	glRotatef(leftLeg5, 1, 0, 0);
+
+
 	glRotatef(leftLeg6, 0, 0, 1);
 	
 
@@ -9491,10 +9896,12 @@ void rightLeg() {
 
 	glRotatef(rightLeg1, 1, 0, 0);
 
+
 	glRotatef(rightLeg2, 0, 1, 0);
 
 
 	glRotatef(rightLeg3, 0, 0, 1);
+
 
 
 	////glRotatef(5, 0, 0, 1);
@@ -9548,6 +9955,7 @@ void rightLeg() {
 	glTranslatef(0, 0.65, 0.1);
 
 	glRotatef(rightLeg4, 1, 0, 0);
+
 
 	glTranslatef(0, -0.65, -0.1);
 	//to centre
@@ -11402,6 +11810,23 @@ void display()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
 	//gluLookAt(eyeX, eyeY, eyeZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
+	
+	leftLeg3 += leftLeg3s;
+	leftLeg6 += leftLeg6s;
+	rightLeg1 += rightLeg1s;
+	rightLeg3 += rightLeg3s;
+	rightLeg4 += rightLeg4s;
+	rightLeg6 += rightLeg6s;
+	rotaionhead1 += rotaionhead1s;
+	rotaionhead2 += rotaionhead2s;
+	rotationhandleft += rotationhandlefts;
+	rotationhandleft2 += rotationhandleft2s;
+	rotationhandleft3 += rotationhandleft3s;
+	rotationhandleft4 += rotationhandleft4s;
+	rotationhandright += rotationhandrights;
+	rotationhandright2 += rotationhandright2s;
+	rotationhandright3 += rotationhandright3s;
+
 
 
 	glTranslatef(0.0f, -0.0f, -3.0f);
@@ -11485,9 +11910,9 @@ void display()
 	}
 
 	glRotatef(rotaionhead1, 1.0f, 0.0f, 0.0f);
-
-	glRotatef(20, 1.0f, 0.0f, 0.0f);
+	
 	glRotatef(rotaionhead2, 0.0f, 1.0f, 0.0f);
+	
 
 	head();
 	glPopMatrix();
@@ -11636,6 +12061,7 @@ void display()
 
 
 
+
 	glRotatef(rotationhandright3, 0.0f, 1.0f, 0.0f);
 
 
@@ -11693,6 +12119,20 @@ void display()
 	}
 	else if (transform == 0) {
 		backAnimation();
+	}
+
+	if (pose1 == 1) {
+		pose1a();
+	}
+	else if (pose1 == 0) {
+		pose1ab();
+	}
+
+	if (pose2 == 1) {
+		pose2a();
+	}
+	else if (pose2 == 0) {
+		pose2ab();
 	}
 
 	if (rightSaberB == 1) {
