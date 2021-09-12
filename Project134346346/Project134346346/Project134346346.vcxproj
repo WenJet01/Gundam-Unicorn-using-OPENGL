@@ -147,6 +147,8 @@
     <Image Include="logo3.bmp" />
     <Image Include="logo4.bmp" />
     <Image Include="space.bmp" />
+    <Image Include="space2.bmp" />
+    <Image Include="white.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

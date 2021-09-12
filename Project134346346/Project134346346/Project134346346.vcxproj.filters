@@ -35,5 +35,11 @@
     <Image Include="logo4.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="white.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="space2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
