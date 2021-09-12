@@ -11,19 +11,23 @@
 
 GLuint logo1 = 0;
 BITMAP BMP1;
-HBITMAP hBMP1 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "image1.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
+HBITMAP hBMP1 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "logo1.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
 
 GLuint logo2 = 0;
 BITMAP BMP2;
-HBITMAP hBMP2 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "image2.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
+HBITMAP hBMP2 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "logo2.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
 
 GLuint logo3 = 0;
 BITMAP BMP3;
-HBITMAP hBMP3 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "image3.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
+HBITMAP hBMP3 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "logo3.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
 
 GLuint logo4 = 0;
 BITMAP BMP4;
-HBITMAP hBMP4 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "image5.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
+HBITMAP hBMP4 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "logo4.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
+
+GLuint logo5 = 0;
+BITMAP BMP5;
+HBITMAP hBMP5 = (HBITMAP)LoadImage(GetModuleHandle(NULL), "space.bmp", IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE);
 
 int transform = -1;
 
@@ -3914,15 +3918,22 @@ void body()
 
 	glEnd();
 
+	glEnable( GL_TEXTURE_2D );
+	glBindTexture(GL_TEXTURE_2D, logo1);
 	glBegin(GL_QUADS);//outside up
 
 	glColor3f(1.0f, 1.0f, 1.0f);
+	glTexCoord2f(0.30f, 0.80f);
 	glVertex3f(-0.075f, 0.3625f, 0.1375f);
+	glTexCoord2f(0.70f, 0.80f);
 	glVertex3f(0.075f, 0.3625f, 0.1375f);
+	glTexCoord2f(0.60f, 0.0f);
 	glVertex3f(0.05f, 0.25f, 0.25f);
+	glTexCoord2f(0.40f, 0.0f);
 	glVertex3f(-0.05f, 0.25f, 0.25f);
 
 	glEnd();
+	glDisable( GL_TEXTURE_2D );
 
 	glBegin(GL_QUADS);//outside down
 
@@ -11377,6 +11388,16 @@ void display()
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, BMP4.bmWidth, BMP4.bmHeight, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, BMP4.bmBits);
 	glDisable(GL_TEXTURE_2D);
 
+	GetObject(hBMP5, sizeof(BMP5), &BMP5);
+	glEnable(GL_TEXTURE_2D);
+	glGenTextures(1, &logo5);
+	glBindTexture(GL_TEXTURE_2D, logo5);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, BMP5.bmWidth, BMP5.bmHeight, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, BMP5.bmBits);
+	glDisable(GL_TEXTURE_2D);
+
+
 	glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
@@ -11715,11 +11736,11 @@ void display()
 	sifat();
 	glPopMatrix();
 
-
-
-	glDisable(GL_TEXTURE_2D);
-	glDeleteTextures(1, &texture);
-
+	glDeleteTextures(1, &logo1);
+	glDeleteTextures(1, &logo2);
+	glDeleteTextures(1, &logo3);
+	glDeleteTextures(1, &logo4);
+	glDeleteTextures(1, &logo5);
 	//--------------------------------
 	//	End of OpenGL drawing
 	//--------------------------------
@@ -11803,12 +11824,12 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 
 		SwapBuffers(hdc);
 	}
+	UnregisterClass(WINDOW_TITLE, wc.hInstance);
 	DeleteObject(hBMP1);
 	DeleteObject(hBMP2);
 	DeleteObject(hBMP3);
 	DeleteObject(hBMP4);
-	UnregisterClass(WINDOW_TITLE, wc.hInstance);
-
+	DeleteObject(hBMP5);
 	return true;
 }
 //------------------------------------------------
