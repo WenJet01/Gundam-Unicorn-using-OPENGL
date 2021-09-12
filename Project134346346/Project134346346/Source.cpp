@@ -151,6 +151,11 @@ float saberRotationSpeed = 0.0f;
 float saberY = -0.16f;
 float saberYSpeed = 0.0f;
 
+float leftSaberRotation = 0.0f;
+float leftSaberRotationSpeed = 0.0f;
+float leftSaberY = -0.16f;
+float leftSaberYSpeed = 0.0f;
+
 GLUquadricObj* leftLegBone = gluNewQuadric();
 GLUquadricObj* leftLegRedBone = gluNewQuadric();
 GLUquadricObj* leftLegUpperJoint = gluNewQuadric();
@@ -166,6 +171,10 @@ GLUquadricObj* rightArmJointInner = gluNewQuadric();
 float eyeX = 0.0f;
 float eyeY = 0.0f;
 float eyeZ = 1.0f;
+
+
+int rightSaberB = -1;
+int leftSaberB = -1;
 
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -394,6 +403,36 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		if (wParam == 0x56) {  //V
 
 		}
+
+		if (wParam == 0x31) {  //1
+			if (leftSaberB == -1) {
+				leftSaberB = 1;
+			}
+			else if (leftSaberB == 1) {
+				leftSaberB = 0;
+			}
+			else if (leftSaberB == 0) {
+				leftSaberB = 1;
+			}
+		}
+
+		if (wParam == 0x32) {  //2
+			
+			if (rightSaberB == -1) {
+				rightSaberB = 1;
+			}
+			else if (rightSaberB == 1) {
+				rightSaberB = 0;
+			}
+			else if (rightSaberB == 0) {
+				rightSaberB = 1;
+			}
+			
+
+			
+		}
+
+
 
 
 	default:
@@ -7203,6 +7242,47 @@ void sifat()
 
 }
 
+
+void rightSaberAnimation() {
+	
+		saberRotationSpeed = 0.1f;
+
+		if (saberRotation == 180) {
+			saberYSpeed = 0.0002f;
+		}
+	
+}
+
+void rightSaberAnimationBack() {
+	
+		saberYSpeed = -0.0002f;
+
+		if (saberY == -0.16f) {
+			saberRotationSpeed = -0.1f;
+		}
+	
+}
+
+void leftSaberAnimation() {
+
+	leftSaberRotationSpeed = 0.1f;
+
+	if (leftSaberRotation == 180) {
+		leftSaberYSpeed = 0.0002f;
+	}
+
+}
+
+void leftSaberAnimationBack() {
+
+	leftSaberYSpeed = -0.0002f;
+
+	if (leftSaberY == -0.16f) {
+		leftSaberRotationSpeed = -0.1f;
+	}
+
+}
+
 void animation() {
 	if (rotationFoot < 27.5) {
 		rotationSpeedfoot = 0.02f;
@@ -7226,11 +7306,11 @@ void animation() {
 	}
 
 	if (upperLegBreak == 0.035f) {
-		lowerHandBreakSpeed = 0.00005f;
+		lowerHandBreakSpeed = 0.00005f;  //lowerHandBreak == 0.03f
 	}
 
 	if (lowerHandBreak == 0.03f) {
-		saberRotationSpeed = 0.1f;
+		saberRotationSpeed = 0.1f;   
 
 	}
 
@@ -7276,6 +7356,204 @@ void backAnimation() {
 
 	}
 
+}
+
+void leftSaber() {
+	//saber
+	glPushMatrix();
+
+	glTranslatef(0.1, -0.2, 0);
+
+	leftSaberY += leftSaberYSpeed;
+	leftSaberRotation += leftSaberRotationSpeed;
+	glRotatef(-leftSaberRotation, 0, 0, 1);
+	glTranslatef(-0.1, 0.2, 0);
+
+	if (leftSaberRotation >= 180) {
+		leftSaberRotation = 180;
+		leftSaberRotationSpeed = 0.0f;
+	}
+	else if (leftSaberRotation <= 0) {
+		leftSaberRotation = 0;
+		leftSaberRotationSpeed = 0.0f;
+	}
+
+	if (leftSaberY >= 0.5f) {
+		leftSaberY = 0.5f;
+		leftSaberYSpeed = 0.0f;
+	}
+	else if (leftSaberY < -0.16f) {
+		leftSaberY = -0.16f;
+		leftSaberYSpeed = 0.0f;
+	}
+
+	glColor3f(0.4, 0.4, 0.4);
+	//front
+	glBegin(GL_QUADS);
+	glVertex3f(0.1, -0.21, 0.01);
+	glVertex3f(0.1, -0.21, -0.01);
+	glVertex3f(0.1, -0.16, -0.01);
+	glVertex3f(0.1, -0.16, 0.01);
+	glEnd();
+
+	//back
+	glBegin(GL_QUADS);
+	glVertex3f(0.08, -0.21, 0.01);
+	glVertex3f(0.08, -0.21, -0.01);
+	glVertex3f(0.08, -0.16, -0.01);
+	glVertex3f(0.08, -0.16, 0.01);
+	glEnd();
+
+	//left
+	glBegin(GL_QUADS);
+	glVertex3f(0.08, -0.21, 0.01);
+	glVertex3f(0.1, -0.21, 0.01);
+	glVertex3f(0.1, -0.16, 0.01);
+	glVertex3f(0.08, -0.16, 0.01);
+	glEnd();
+
+	//right
+	glBegin(GL_QUADS);
+	glVertex3f(0.08, -0.21, -0.01);
+	glVertex3f(0.1, -0.21, -0.01);
+	glVertex3f(0.1, -0.16, -0.01);
+	glVertex3f(0.08, -0.16, -0.01);
+	glEnd();
+
+	//back
+	glBegin(GL_QUADS);
+	glVertex3f(0.08, -0.21, 0.01);
+	glVertex3f(0.1, -0.21, 0.01);
+	glVertex3f(0.1, -0.21, -0.01);
+	glVertex3f(0.08, -0.21, -0.01);
+	glEnd();
+
+	//pyramid
+	glColor3f(0.898, 0.388, 1);
+	glBegin(GL_TRIANGLES);
+	glVertex3f(0.1, -0.16, 0.01);
+	glVertex3f(0.1, -0.16, -0.01);
+	glVertex3f(0.09, leftSaberY, 0);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+	glVertex3f(0.08, -0.16, 0.01);
+	glVertex3f(0.08, -0.16, -0.01);
+	glVertex3f(0.09, leftSaberY, 0);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+	glVertex3f(0.08, -0.16, 0.01);
+	glVertex3f(0.1, -0.16, 0.01);
+	glVertex3f(0.09, leftSaberY, 0);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+	glVertex3f(0.08, -0.16, -0.01);
+	glVertex3f(0.1, -0.16, -0.01);
+	glVertex3f(0.09, leftSaberY, 0);
+	glEnd();
+
+	glPopMatrix();
+}
+
+void rightSaber() {
+	//saber
+	glPushMatrix();
+
+	glTranslatef(0.1, -0.2, 0);
+
+	saberY += saberYSpeed;
+	saberRotation += saberRotationSpeed;
+	glRotatef(-saberRotation, 0, 0, 1);
+	glTranslatef(-0.1, 0.2, 0);
+
+	if (saberRotation >= 180) {
+		saberRotation = 180;
+		saberRotationSpeed = 0.0f;
+	}
+	else if (saberRotation <= 0) {
+		saberRotation = 0;
+		saberRotationSpeed = 0.0f;
+	}
+
+	if (saberY >= 0.5f) {
+		saberY = 0.5f;
+		saberYSpeed = 0.0f;
+	}
+	else if (saberY < -0.16f) {
+		saberY = -0.16f;
+		saberYSpeed = 0.0f;
+	}
+
+	glColor3f(0.4, 0.4, 0.4);
+	//front
+	glBegin(GL_QUADS);
+	glVertex3f(0.1, -0.21, 0.01);
+	glVertex3f(0.1, -0.21, -0.01);
+	glVertex3f(0.1, -0.16, -0.01);
+	glVertex3f(0.1, -0.16, 0.01);
+	glEnd();
+
+	//back
+	glBegin(GL_QUADS);
+	glVertex3f(0.08, -0.21, 0.01);
+	glVertex3f(0.08, -0.21, -0.01);
+	glVertex3f(0.08, -0.16, -0.01);
+	glVertex3f(0.08, -0.16, 0.01);
+	glEnd();
+
+	//left
+	glBegin(GL_QUADS);
+	glVertex3f(0.08, -0.21, 0.01);
+	glVertex3f(0.1, -0.21, 0.01);
+	glVertex3f(0.1, -0.16, 0.01);
+	glVertex3f(0.08, -0.16, 0.01);
+	glEnd();
+
+	//right
+	glBegin(GL_QUADS);
+	glVertex3f(0.08, -0.21, -0.01);
+	glVertex3f(0.1, -0.21, -0.01);
+	glVertex3f(0.1, -0.16, -0.01);
+	glVertex3f(0.08, -0.16, -0.01);
+	glEnd();
+
+	//back
+	glBegin(GL_QUADS);
+	glVertex3f(0.08, -0.21, 0.01);
+	glVertex3f(0.1, -0.21, 0.01);
+	glVertex3f(0.1, -0.21, -0.01);
+	glVertex3f(0.08, -0.21, -0.01);
+	glEnd();
+
+	//pyramid
+	glColor3f(0.898, 0.388, 1);
+	glBegin(GL_TRIANGLES);
+	glVertex3f(0.1, -0.16, 0.01);
+	glVertex3f(0.1, -0.16, -0.01);
+	glVertex3f(0.09, saberY, 0);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+	glVertex3f(0.08, -0.16, 0.01);
+	glVertex3f(0.08, -0.16, -0.01);
+	glVertex3f(0.09, saberY, 0);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+	glVertex3f(0.08, -0.16, 0.01);
+	glVertex3f(0.1, -0.16, 0.01);
+	glVertex3f(0.09, saberY, 0);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+	glVertex3f(0.08, -0.16, -0.01);
+	glVertex3f(0.1, -0.16, -0.01);
+	glVertex3f(0.09, saberY, 0);
+	glEnd();
+
+	glPopMatrix();
 }
 
 void legThruster() {
@@ -9111,7 +9389,7 @@ void hand() {
 
 }
 
-void bighand()
+void rightBighand()
 {
 	glPushMatrix();
 	glTranslatef(0, 0, 0);
@@ -9367,102 +9645,350 @@ void bighand()
 	glVertex3f(-0.03, -0.16, -0.03);
 	glEnd();
 
-	//saber
+	rightSaber();
+
+
+
+
+	//lowerbreak
 	glPushMatrix();
 
-	glTranslatef(0.1, -0.2, 0);
 
-	saberY += saberYSpeed;
-	saberRotation += saberRotationSpeed;
-	glRotatef(-saberRotation, 0, 0, 1);
-	glTranslatef(-0.1, 0.2, 0);
-
-	if (saberRotation >= 180) {
-		saberRotation = 180;
-		saberRotationSpeed = 0.0f;
+	lowerHandBreak += lowerHandBreakSpeed;
+	glTranslatef(0, -lowerHandBreak, 0);
+	if (lowerHandBreak >= 0.03f) {
+		lowerHandBreak = 0.03f;
+		lowerHandBreakSpeed = 0.0f;
 	}
-	else if (saberRotation <= 0) {
-		saberRotation = 0;
-		saberRotationSpeed = 0.0f;
+	else if (lowerHandBreak <= 0.0f) {
+		lowerHandBreak = 0.0f;
+		lowerHandBreakSpeed = 0.0f;
 	}
 
-	if (saberY >= 0.5f) {
-		saberY = 0.5f;
-		saberYSpeed = 0.0f;
-	}
-	else if (saberY < -0.16f) {
-		saberY = -0.16f;
-		saberYSpeed = 0.0f;
-	}
+	glColor3f(1, 1, 1);
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.04, -0.3, 0.04);
+	glVertex3f(0.04, -0.3, 0.04);
+	glVertex3f(0.04, -0.24, 0.04);
+	glVertex3f(-0.04, -0.20, 0.04);
+	glEnd();
 
-	glColor3f(0.4, 0.4, 0.4);
-	//front
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.04, -0.3, -0.04);
+	glVertex3f(0.04, -0.3, -0.04);
+	glVertex3f(0.04, -0.24, -0.04);
+	glVertex3f(-0.04, -0.20, -0.04);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.04, -0.3, -0.04);
+	glVertex3f(-0.04, -0.3, 0.04);
+	glVertex3f(-0.04, -0.20, 0.04);
+	glVertex3f(-0.04, -0.20, -0.04);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.3, -0.04);
+	glVertex3f(0.04, -0.3, 0.04);
+	glVertex3f(0.04, -0.24, 0.04);
+	glVertex3f(0.04, -0.24, -0.04);
+	glEnd();
+
+	//outter part low
+	glColor3f(0.98, 0.98, 0.98);
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.295, 0.038);
+	glVertex3f(0.085, -0.272, 0.038);
+	glVertex3f(0.085, -0.234, 0.038);  //23
+	glVertex3f(0.04, -0.26, 0.038);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.295, -0.038);
+	glVertex3f(0.085, -0.272, -0.038);
+	glVertex3f(0.085, -0.234, -0.038);
+	glVertex3f(0.04, -0.26, -0.038);
+	glEnd();
+
+	//down
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.295, 0.038);
+	glVertex3f(0.04, -0.295, -0.038);
+	glVertex3f(0.085, -0.272, -0.038);
+	glVertex3f(0.085, -0.272, 0.038);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.085, -0.272, -0.038);
+	glVertex3f(0.085, -0.272, 0.038);
+	glVertex3f(0.085, -0.234, 0.038);
+	glVertex3f(0.085, -0.234, -0.038);
+	glEnd();
+
+	glPopMatrix();
+
+	glPopMatrix();
+
+
+}
+
+void leftBighand()
+{
+	glPushMatrix();
+	glTranslatef(0, 0, 0);
+	glScalef(1.4, 1.2, 1.4);
+
+	rightArmJoints();
+
+	//big hand
+	glColor3f(0.9, 0.9, 0.9);
 	glBegin(GL_QUADS);
-	glVertex3f(0.1, -0.21, 0.01);
-	glVertex3f(0.1, -0.21, -0.01);
-	glVertex3f(0.1, -0.16, -0.01);
-	glVertex3f(0.1, -0.16, 0.01);
+	glVertex3f(-0.04, -0.15, 0.04);
+	glVertex3f(0.04, -0.15, 0.04);
+	glVertex3f(0.025, -0.13, 0.025);
+	glVertex3f(-0.025, -0.13, 0.025);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glVertex3f(-0.04, -0.15, -0.04);
+	glVertex3f(0.04, -0.15, -0.04);
+	glVertex3f(0.025, -0.13, -0.025);
+	glVertex3f(-0.025, -0.13, -0.025);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glVertex3f(-0.04, -0.15, -0.04);
+	glVertex3f(-0.04, -0.15, 0.04);
+	glVertex3f(-0.025, -0.13, 0.025);
+	glVertex3f(-0.025, -0.13, -0.025);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glVertex3f(0.04, -0.15, -0.04);
+	glVertex3f(0.04, -0.15, 0.04);
+	glVertex3f(0.025, -0.13, 0.025);
+	glVertex3f(0.025, -0.13, -0.025);
+	glEnd();
+
+	//upperbreak
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.04, -0.20, 0.04);
+	glVertex3f(0.04, -0.24, 0.04);
+	glVertex3f(0.04, -0.15, 0.04);
+	glVertex3f(-0.04, -0.15, 0.04);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.04, -0.20, -0.04);
+	glVertex3f(0.04, -0.24, -0.04);
+	glVertex3f(0.04, -0.15, -0.04);
+	glVertex3f(-0.04, -0.15, -0.04);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.04, -0.20, -0.04);
+	glVertex3f(-0.04, -0.20, 0.04);
+	glVertex3f(-0.04, -0.15, 0.04);
+	glVertex3f(-0.04, -0.15, -0.04);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.24, -0.04);
+	glVertex3f(0.04, -0.24, 0.04);
+	glVertex3f(0.04, -0.15, 0.04);
+	glVertex3f(0.04, -0.15, -0.04);
+	glEnd();
+
+	//outter hand
+	//front
+	glColor3f(0.95, 0.95, 0.95);
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.26, 0.04);
+	glVertex3f(0.10, -0.23, 0.04);
+	glVertex3f(0.10, -0.04, 0.04);
+	glVertex3f(0.08, -0.04, 0.04);
+	glVertex3f(0.04, -0.08, 0.04);
+	glEnd();
+
+	//thick
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.26, 0.025);
+	glVertex3f(0.10, -0.23, 0.025);
+	glVertex3f(0.10, -0.04, 0.025);
+	glVertex3f(0.08, -0.04, 0.025);
+	glVertex3f(0.04, -0.08, 0.025);
 	glEnd();
 
 	//back
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.26, -0.04);
+	glVertex3f(0.10, -0.23, -0.04);
+	glVertex3f(0.10, -0.04, -0.04);
+	glVertex3f(0.08, -0.04, -0.04);
+	glVertex3f(0.04, -0.08, -0.04);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.26, -0.025);
+	glVertex3f(0.10, -0.23, -0.025);
+	glVertex3f(0.10, -0.04, -0.025);
+	glVertex3f(0.08, -0.04, -0.025);
+	glVertex3f(0.04, -0.08, -0.025);
+	glEnd();
+
+	//thick de wall
+	glColor3f(0.96, 0.96, 0.96);
 	glBegin(GL_QUADS);
-	glVertex3f(0.08, -0.21, 0.01);
-	glVertex3f(0.08, -0.21, -0.01);
-	glVertex3f(0.08, -0.16, -0.01);
-	glVertex3f(0.08, -0.16, 0.01);
+	glVertex3f(0.1, -0.23, 0.04);
+	glVertex3f(0.1, -0.23, 0.025);
+	glVertex3f(0.1, -0.04, 0.025);
+	glVertex3f(0.1, -0.04, 0.04);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glVertex3f(0.1, -0.23, -0.04);
+	glVertex3f(0.1, -0.23, -0.025);
+	glVertex3f(0.1, -0.04, -0.025);
+	glVertex3f(0.1, -0.04, -0.04);
 	glEnd();
 
 	//left
 	glBegin(GL_QUADS);
-	glVertex3f(0.08, -0.21, 0.01);
-	glVertex3f(0.1, -0.21, 0.01);
-	glVertex3f(0.1, -0.16, 0.01);
-	glVertex3f(0.08, -0.16, 0.01);
+	glVertex3f(0.04, -0.26, -0.04);
+	glVertex3f(0.04, -0.26, 0.04);
+	glVertex3f(0.04, -0.08, 0.04);
+	glVertex3f(0.04, -0.08, -0.04);
 	glEnd();
 
-	//right
+	//lower up
 	glBegin(GL_QUADS);
-	glVertex3f(0.08, -0.21, -0.01);
-	glVertex3f(0.1, -0.21, -0.01);
-	glVertex3f(0.1, -0.16, -0.01);
-	glVertex3f(0.08, -0.16, -0.01);
+	glVertex3f(0.04, -0.08, -0.04);
+	glVertex3f(0.04, -0.08, 0.04);
+	glVertex3f(0.08, -0.04, 0.04);
+	glVertex3f(0.08, -0.04, -0.04);
 	glEnd();
 
-	//back
+	//up up
 	glBegin(GL_QUADS);
-	glVertex3f(0.08, -0.21, 0.01);
-	glVertex3f(0.1, -0.21, 0.01);
-	glVertex3f(0.1, -0.21, -0.01);
-	glVertex3f(0.08, -0.21, -0.01);
+	glVertex3f(0.08, -0.04, -0.04);
+	glVertex3f(0.08, -0.04, 0.04);
+	glVertex3f(0.1, -0.04, 0.04);
+	glVertex3f(0.1, -0.04, -0.04);
 	glEnd();
 
-	//pyramid
-	glColor3f(0.898, 0.388, 1);
-	glBegin(GL_TRIANGLES);
-	glVertex3f(0.1, -0.16, 0.01);
-	glVertex3f(0.1, -0.16, -0.01);
-	glVertex3f(0.09, saberY, 0);
+	//middle de wall
+	glColor3f(0.9, 0.9, 0.9);
+	glBegin(GL_QUADS);
+	glVertex3f(0.04, -0.14, -0.04);
+	glVertex3f(0.04, -0.14, 0.04);
+	glVertex3f(0.1, -0.11, 0.04);
+	glVertex3f(0.1, -0.11, -0.04);
 	glEnd();
 
-	glBegin(GL_TRIANGLES);
-	glVertex3f(0.08, -0.16, 0.01);
-	glVertex3f(0.08, -0.16, -0.01);
-	glVertex3f(0.09, saberY, 0);
+	glColor3f(0.96, 0.96, 0.96);
+	glBegin(GL_QUADS);
+	glVertex3f(0.1, -0.11, 0.04);
+	glVertex3f(0.1, -0.11, -0.04);
+	glVertex3f(0.1, -0.04, -0.04);
+	glVertex3f(0.1, -0.04, 0.04);
 	glEnd();
 
-	glBegin(GL_TRIANGLES);
-	glVertex3f(0.08, -0.16, 0.01);
-	glVertex3f(0.1, -0.16, 0.01);
-	glVertex3f(0.09, saberY, 0);
+
+	//below de wall
+	//middle
+	glBegin(GL_QUADS);
+	glVertex3f(0.04, -0.26, -0.04);
+	glVertex3f(0.04, -0.26, 0.04);
+	glVertex3f(0.06, -0.25, 0.04);
+	glVertex3f(0.06, -0.25, -0.04);
 	glEnd();
 
-	glBegin(GL_TRIANGLES);
-	glVertex3f(0.08, -0.16, -0.01);
-	glVertex3f(0.1, -0.16, -0.01);
-	glVertex3f(0.09, saberY, 0);
+	//left (front)
+	glBegin(GL_QUADS);
+	glVertex3f(0.04, -0.26, 0.04);
+	glVertex3f(0.04, -0.26, 0.025);
+	glVertex3f(0.1, -0.23, 0.025);
+	glVertex3f(0.1, -0.23, 0.04);
 	glEnd();
 
-	glPopMatrix();
+	glBegin(GL_QUADS);
+	glVertex3f(0.04, -0.26, -0.04);
+	glVertex3f(0.04, -0.26, -0.025);
+	glVertex3f(0.1, -0.23, -0.025);
+	glVertex3f(0.1, -0.23, -0.04);
+	glEnd();
+
+	//inside de wall
+	glColor3f(0.8, 0.8, 0.8);
+	glBegin(GL_QUADS);
+	glVertex3f(0.06, -0.25, 0.04);
+	glVertex3f(0.06, -0.25, -0.04);
+	glVertex3f(0.06, -0.06, -0.04);
+	glVertex3f(0.06, -0.06, 0.04);
+	glEnd();
+
+	//red inside for outter hand
+	glColor3f(1, 0, 0);
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.29, 0.034);
+	glVertex3f(0.08, -0.27, 0.034);
+	glVertex3f(0.08, -0.24, 0.034);
+	glVertex3f(0.04, -0.26, 0.034);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.29, -0.034);
+	glVertex3f(0.08, -0.27, -0.034);
+	glVertex3f(0.08, -0.24, -0.034);
+	glVertex3f(0.04, -0.26, -0.034);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.08, -0.27, 0.034);
+	glVertex3f(0.08, -0.27, -0.034);
+	glVertex3f(0.08, -0.24, -0.034);
+	glVertex3f(0.08, -0.24, 0.034);
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.29, -0.034);
+	glVertex3f(0.04, -0.29, 0.034);
+	glVertex3f(0.04, -0.26, 0.034);
+	glVertex3f(0.04, -0.26, -0.034);
+	glEnd();
+
+	glColor3f(0.95, 0.95, 0.95);
+	glBegin(GL_POLYGON);
+	glVertex3f(0.04, -0.26, -0.034);
+	glVertex3f(0.04, -0.26, 0.034);
+	glVertex3f(0.08, -0.24, 0.034);
+	glVertex3f(0.08, -0.24, -0.034);
+	glEnd();
+
+	//red inside for inside
+	glColor3f(1, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex3f(-0.03, -0.28, 0.03);
+	glVertex3f(0.04, -0.28, 0.03);
+	glVertex3f(0.04, -0.16, 0.03);
+	glVertex3f(-0.03, -0.16, 0.03);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glVertex3f(-0.03, -0.28, -0.03);
+	glVertex3f(0.04, -0.28, -0.03);
+	glVertex3f(0.04, -0.16, -0.03);
+	glVertex3f(-0.03, -0.16, -0.03);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glVertex3f(-0.03, -0.28, -0.03);
+	glVertex3f(-0.03, -0.28, 0.03);
+	glVertex3f(-0.03, -0.16, 0.03);
+	glVertex3f(-0.03, -0.16, -0.03);
+	glEnd();
+
+	leftSaber();
 
 
 
@@ -10591,7 +11117,7 @@ void display()
 	glRotatef(rotationhandleft4, 1.0f, 0.0f, 0.0f);
 
 	glTranslatef(0, +0.14, 0);
-	bighand();
+	leftBighand();
 
 	glPushMatrix();
 	glRotatef(180, 0.0f, 1.0f, 0.0f);
@@ -10671,7 +11197,7 @@ void display()
 
 	glTranslatef(0, +0.14, 0);
 
-	bighand();
+	rightBighand();
 
 	glPushMatrix();
 	rightpunch();
@@ -10703,6 +11229,20 @@ void display()
 	}
 	else if (transform == 0) {
 		backAnimation();
+	}
+
+	if (rightSaberB == 1) {
+		rightSaberAnimation();
+	}
+	else if (rightSaberB == 0) {
+		rightSaberAnimationBack();
+	}
+
+	if (leftSaberB == 1) {
+		leftSaberAnimation();
+	}
+	else if (leftSaberB == 0) {
+		leftSaberAnimationBack();
 	}
 
 
