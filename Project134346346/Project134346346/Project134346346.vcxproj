@@ -142,10 +142,11 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="image1.bmp" />
-    <Image Include="image2.bmp" />
-    <Image Include="image3.bmp" />
-    <Image Include="image4.bmp" />
+    <Image Include="logo1.bmp" />
+    <Image Include="logo2.bmp" />
+    <Image Include="logo3.bmp" />
+    <Image Include="logo4.bmp" />
+    <Image Include="space.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
