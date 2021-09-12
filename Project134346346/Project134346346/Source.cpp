@@ -11059,9 +11059,9 @@ void display()
 
 	glPushMatrix();//left hand
 
-	glRotatef(-12, 0, 0, 1);
+	glRotatef(-6, 0, 0, 1);
 
-	glTranslatef(-0.33, 0.17, 0.0);
+	glTranslatef(-0.295, 0.21, 0.0);
 
 	glTranslatef(0.0, 0.05, 0.0);
 
