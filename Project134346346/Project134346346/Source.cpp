@@ -255,6 +255,8 @@ GLuint texture = 0;
 int pose1 = -1;
 int pose2 = -1;
 
+int viewPoint = 1;
+
 
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -268,35 +270,33 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		if (wParam == VK_ESCAPE)
 			PostQuitMessage(0);
 
-		/*if (wParam == VK_F2) {
-			if (question < 6) {
-				question++;
-			}
+		if (wParam == VK_F2) {
+			viewPoint = 2;
 		}
 		if (wParam == VK_F1) {
-			if (question > 1) {
-				question--;
-			}
-		}*/
+			viewPoint = 1;
+		}
 
 		if (wParam == VK_UP) {
-			//eyeY += 0.08f;
-			rotation2 += 2;
+			eyeY += 0.05f;
 		}
 
 		if (wParam == VK_DOWN) {
-			//eyeY -= 0.08f;
-			rotation2 -= 2;
+			eyeY -= 0.05f;
 		}
 
 		if (wParam == VK_LEFT) {
-			rotation -= 2;
-			//eyeX -= 0.08f;
+			eyeX -= 0.05f;
 		}
 
 		if (wParam == VK_RIGHT) {
-			rotation += 2;
-			//eyeX += 0.08f;
+			eyeX += 0.05f;
+		}
+		if (wParam == 0x39) {
+			eyeZ += 0.05f;
+		}
+		if (wParam == 0x30) {
+			eyeZ -= 0.05f;
 		}
 
 		if (wParam == VK_SPACE) {
@@ -516,6 +516,8 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				rightshield = 0;
 			}
 		}
+
+		
 
 	default:
 		break;
@@ -7691,40 +7693,40 @@ void sifat()
 
 void rightSaberAnimation() {
 
-	saberRotationSpeed = 0.1f;
+	saberRotationSpeed = 0.5f;
 
 	if (saberRotation == 180) {
-		saberYSpeed = 0.002f;
+		saberYSpeed = 0.01f;
 	}
 
 }
 
 void rightSaberAnimationBack() {
 
-	saberYSpeed = -0.002f;
+	saberYSpeed = -0.01f;
 
 	if (saberY == -0.16f) {
-		saberRotationSpeed = -0.1f;
+		saberRotationSpeed = -0.5f;
 	}
 
 }
 
 void leftSaberAnimation() {
 
-	leftSaberRotationSpeed = 0.1f;
+	leftSaberRotationSpeed = 0.5f;
 
 	if (leftSaberRotation == 180) {
-		leftSaberYSpeed = 0.0002f;
+		leftSaberYSpeed = 0.01f;
 	}
 
 }
 
 void leftSaberAnimationBack() {
 
-	leftSaberYSpeed = -0.0002f;
+	leftSaberYSpeed = -0.01f;
 
 	if (leftSaberY == -0.16f) {
-		leftSaberRotationSpeed = -0.1f;
+		leftSaberRotationSpeed = -0.5f;
 	}
 
 }
@@ -11855,7 +11857,16 @@ void display()
 	glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	//gluLookAt(eyeX, eyeY, eyeZ, 0.0f, 0.0f, 0.0f, 0, 1, 0);
+	if (viewPoint == 1) {
+
+		gluPerspective(45, 1, 0.01, 10);
+	}
+	else if (viewPoint == 2) {
+		glTranslatef(0, 0, -1.2);
+		glOrtho(-3, 3, -3, 3, -10, 10);
+	}
+
+	gluLookAt(eyeX, eyeY, eyeZ, 0.0f, 0.0f, -3.0f, 0, 1, 0);
 	
 	leftLeg3 += leftLeg3s;
 	leftLeg6 += leftLeg6s;
@@ -12264,7 +12275,9 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 	//PROJECTION
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(45, 1, 0.01, 10);
+
+	
+	
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
