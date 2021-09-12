@@ -20,16 +20,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="image1.bmp">
+    <Image Include="space.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="image2.bmp">
+    <Image Include="logo1.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="image3.bmp">
+    <Image Include="logo2.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="image4.bmp">
+    <Image Include="logo3.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="logo4.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
