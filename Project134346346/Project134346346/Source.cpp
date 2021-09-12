@@ -7693,40 +7693,40 @@ void sifat()
 
 void rightSaberAnimation() {
 
-	saberRotationSpeed = 0.1f;
+	saberRotationSpeed = 0.5f;
 
 	if (saberRotation == 180) {
-		saberYSpeed = 0.002f;
+		saberYSpeed = 0.01f;
 	}
 
 }
 
 void rightSaberAnimationBack() {
 
-	saberYSpeed = -0.002f;
+	saberYSpeed = -0.01f;
 
 	if (saberY == -0.16f) {
-		saberRotationSpeed = -0.1f;
+		saberRotationSpeed = -0.5f;
 	}
 
 }
 
 void leftSaberAnimation() {
 
-	leftSaberRotationSpeed = 0.1f;
+	leftSaberRotationSpeed = 0.5f;
 
 	if (leftSaberRotation == 180) {
-		leftSaberYSpeed = 0.0002f;
+		leftSaberYSpeed = 0.01f;
 	}
 
 }
 
 void leftSaberAnimationBack() {
 
-	leftSaberYSpeed = -0.0002f;
+	leftSaberYSpeed = -0.01f;
 
 	if (leftSaberY == -0.16f) {
-		leftSaberRotationSpeed = -0.1f;
+		leftSaberRotationSpeed = -0.5f;
 	}
 
 }
